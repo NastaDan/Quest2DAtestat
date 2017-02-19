@@ -1,0 +1,432 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Otter;
+using Quest2D;
+using Quest2D.Util;
+using Quest2D.Effects;
+
+namespace Quest2D.Entities
+{
+
+    public class Player : Entity
+    {
+        public float MoveSpeed = 4.0f;
+        public const float DIAGONAL_SPEED = 1.4f;
+        public bool attacking = false;
+        public bool movement = false;
+        public float animationSpeed = 7;
+        public float animationSpeed2 = 4;
+
+
+
+        enum FacingPosition
+        {
+            Front,
+            Back,
+            Left,
+            Right,
+            Idle
+        }
+
+        Spritemap<string> idleFront = new Spritemap<string>("Assets/idleFront.png", 64, 79);
+        Spritemap<string> idleBack = new Spritemap<string>("Assets/idleBack.png", 64, 77);
+        Spritemap<string> idleSide = new Spritemap<string>("Assets/idleSide.png", 44, 83);
+        Spritemap<string> runBack = new Spritemap<string>("Assets/runBack.png", 76, 81);
+        Spritemap<string> runFront = new Spritemap<string>("Assets/runFront.png", 80, 81);
+        Spritemap<string> runSide = new Spritemap<string>("Assets/runSide.png", 64, 87);
+        Spritemap<string> attackBack = new Spritemap<string>("Assets/attackBack.png", 140, 135);
+        Spritemap<string> attackFront = new Spritemap<string>("Assets/attackFront.png", 124, 147);
+        Spritemap<string> attackSide = new Spritemap<string>("Assets/attackSide.png", 162, 121);
+        FacingPosition direction = FacingPosition.Idle;
+
+        public Player(float x = 0, float y = 0)
+        {
+            X = x;
+            Y = y;
+            idleFront.Add("idleFront", "0,1,2,3,4,5,6", animationSpeed);
+            idleBack.Add("idleBack", "0,1,2,3,4,5,6", animationSpeed);
+            idleSide.Add("idleSide", "0,1,2,3,4,5,6", animationSpeed);
+            runFront.Add("runFront", "0,1,2,3,4,5,6,7,8,9", animationSpeed2);
+            runBack.Add("runBack", "0,1,2,3,4,5,6,7,8,9", animationSpeed2);
+            runSide.Add("runSide", "0,1,2,3,4,5,6,7,8,9", animationSpeed2);
+            attackBack.Add("attackBack", "0,1,2,3,4,5,6", animationSpeed);
+            attackFront.Add("attackFront", "0,1,2,3,4,5,6", animationSpeed);
+            attackSide.Add("attackSide", "0,1,2,3,4,5,6", animationSpeed);
+            AddGraphics(idleBack, idleFront, idleSide, runFront, runBack, runSide, attackFront, attackSide, attackBack);
+
+            idleFront.Visible = true;
+            idleBack.Visible = false;
+            idleSide.Visible = false;
+            runFront.Visible = false;
+            runBack.Visible = false;
+            runSide.Visible = false;
+            attackBack.Visible = false;
+            attackFront.Visible = false;
+            attackSide.Visible = false;
+            idleFront.Play("idleFront");
+
+            SetHitbox(65, 81, (int)Global.Type.PLAYER);
+            SetHitbox(142, 134, (int)Global.Type.ATTACKINGPLAYER);
+        }
+        public override void Update()
+        {
+            base.Update();
+
+            if (Global.PlayerSession.Controller.Button("Attack").Pressed)
+            {
+                idleFront.Visible = false;
+                idleBack.Visible = false;
+                idleSide.Visible = false;
+                runFront.Visible = false;
+                runBack.Visible = false;
+                runSide.Visible = false;
+                attackBack.Visible = false;
+                attackFront.Visible = false;
+                attackSide.Visible = false;
+                Global.camShaker.ShakeCamera();
+                switch (direction)
+
+                {
+                    case FacingPosition.Front:
+                        {
+                            attacking = true;
+                            idleFront.Visible = false;
+                            idleBack.Visible = false;
+                            idleSide.Visible = false;
+                            runFront.Visible = false;
+                            runBack.Visible = false;
+                            runSide.Visible = false;
+                            attackBack.Visible = true;
+                            attackFront.Visible = false;
+                            attackSide.Visible = false;
+                            attackBack.Play("attackBack");
+                            Global.camShaker.ShakeCamera();
+                            break;
+                        }
+                    case FacingPosition.Back:
+                        {
+                            attacking = true;
+                            idleFront.Visible = false;
+                            idleBack.Visible = false;
+                            idleSide.Visible = false;
+                            runFront.Visible = false;
+                            runBack.Visible = false;
+                            runSide.Visible = false;
+                            attackBack.Visible = false;
+                            attackFront.Visible = true;
+                            attackSide.Visible = false;
+                            attackFront.Play("attackFront");
+                            Global.camShaker.ShakeCamera();
+                            break;
+                        }
+                    case FacingPosition.Left:
+                        {
+                            attacking = true;
+                            idleFront.Visible = false;
+                            idleBack.Visible = false;
+                            idleSide.Visible = false;
+                            runFront.Visible = false;
+                            runBack.Visible = false;
+                            runSide.Visible = false;
+                            attackBack.Visible = false;
+                            attackFront.Visible = false;
+                            attackSide.Visible = true;
+                            attackSide.Play("attackSide");
+                            attackSide.FlippedX = true;
+                            Global.camShaker.ShakeCamera();
+                            break;
+                        }
+                    case FacingPosition.Right:
+                        {
+                            attacking = true;
+                            idleFront.Visible = false;
+                            idleBack.Visible = false;
+                            idleSide.Visible = false;
+                            runFront.Visible = false;
+                            runBack.Visible = false;
+                            runSide.Visible = false;
+                            attackBack.Visible = false;
+                            attackFront.Visible = false;
+                            attackSide.Visible = true;
+                            attackSide.Play("attackSide");
+                            attackSide.FlippedX = false;
+                            Global.camShaker.ShakeCamera();
+                            break;
+                        }
+                }
+            }
+            if (Global.PlayerSession.Controller.Button("Attack").Released)
+            {
+
+                switch (direction)
+                {
+                    case FacingPosition.Front:
+                        {
+                            attacking = false;
+                            idleFront.Visible = false;
+                            idleBack.Visible = true;
+                            idleSide.Visible = false;
+                            runFront.Visible = false;
+                            runBack.Visible = false;
+                            runSide.Visible = false;
+                            attackBack.Visible = false;
+                            attackFront.Visible = false;
+                            attackSide.Visible = false;
+                            idleBack.Play("idleBack");
+                            break;
+                        }
+                    case FacingPosition.Back:
+                        {
+                            attacking = false;
+                            idleFront.Visible = true;
+                            idleBack.Visible = false;
+                            idleSide.Visible = false;
+                            runFront.Visible = false;
+                            runBack.Visible = false;
+                            runSide.Visible = false;
+                            attackBack.Visible = false;
+                            attackFront.Visible = false;
+                            attackSide.Visible = false;
+                            idleFront.Play("idleFront");
+                            break;
+                        }
+                    case FacingPosition.Left:
+                        {
+                            attacking = false;
+                            idleFront.Visible = false;
+                            idleBack.Visible = false;
+                            idleSide.Visible = true;
+                            runFront.Visible = false;
+                            runBack.Visible = false;
+                            runSide.Visible = false;
+                            attackBack.Visible = false;
+                            attackFront.Visible = false;
+                            attackSide.Visible = false;
+                            idleSide.Play("idleSide");
+                            idleSide.FlippedX = true;
+                            break;
+                        }
+                    case FacingPosition.Right:
+                        {
+                            attacking = false;
+                            idleFront.Visible = false;
+                            idleBack.Visible = false;
+                            idleSide.Visible = true;
+                            runFront.Visible = false;
+                            runBack.Visible = false;
+                            runSide.Visible = false;
+                            attackBack.Visible = false;
+                            attackFront.Visible = false;
+                            attackSide.Visible = false;
+                            idleSide.Play("idleSide");
+                            idleSide.FlippedX = false;
+                            break;
+                        }
+                }
+            }
+
+            if (attacking == false)
+            {
+                if (Global.PlayerSession.Controller.Button("Up").Down)
+                {
+                    Y -= MoveSpeed;
+                }
+                if (Global.PlayerSession.Controller.Button("Left").Down)
+                {
+                    X -= MoveSpeed;
+                }
+                if (Global.PlayerSession.Controller.Button("Right").Down)
+                {
+                    X += MoveSpeed;
+                }
+                if (Global.PlayerSession.Controller.Button("Down").Down)
+                {
+                    Y += MoveSpeed;
+                }
+
+                if (Global.PlayerSession.Controller.Button("Left").Pressed)
+                {
+                    idleFront.Visible = false;
+                    idleBack.Visible = false;
+                    idleSide.Visible = false;
+                    runFront.Visible = false;
+                    runBack.Visible = false;
+                    runSide.Visible = true;
+                    attackBack.Visible = false;
+                    attackFront.Visible = false;
+                    attackSide.Visible = false;
+                    runSide.Play("runSide");
+                    runSide.FlippedX = true;
+                    movement = true;
+                    direction = FacingPosition.Left;
+                }
+                else if (Global.PlayerSession.Controller.Button("Right").Pressed)
+                {
+                    idleFront.Visible = false;
+                    idleBack.Visible = false;
+                    idleSide.Visible = false;
+                    runFront.Visible = false;
+                    runBack.Visible = false;
+                    runSide.Visible = true;
+                    attackBack.Visible = false;
+                    attackFront.Visible = false;
+                    attackSide.Visible = false;
+                    runSide.Play("runSide");
+                    runSide.FlippedX = false;
+                    movement = true;
+                    direction = FacingPosition.Right;
+                }
+                else if (Global.PlayerSession.Controller.Button("Up").Pressed)
+                {
+                    idleFront.Visible = false;
+                    idleBack.Visible = false;
+                    idleSide.Visible = false;
+                    runFront.Visible = false;
+                    runBack.Visible = true;
+                    runSide.Visible = false;
+                    attackBack.Visible = false;
+                    attackFront.Visible = false;
+                    attackSide.Visible = false;
+                    runBack.Play("runBack");
+                    //runSide.FlippedX = false;
+                    movement = true;
+                    direction = FacingPosition.Front;
+                }
+                else if (Global.PlayerSession.Controller.Button("Down").Pressed)
+                {
+                    idleFront.Visible = false;
+                    idleBack.Visible = false;
+                    idleSide.Visible = false;
+                    runFront.Visible = true;
+                    runBack.Visible = false;
+                    runSide.Visible = false;
+                    attackBack.Visible = false;
+                    attackFront.Visible = false;
+                    attackSide.Visible = false;
+                    runFront.Play("runFront");
+                    //runSide.FlippedX = false;
+                    movement = true;
+                    direction = FacingPosition.Back;
+                }
+
+                else if (Global.PlayerSession.Controller.Button("Left").Released)
+                {
+                    idleFront.Visible = false;
+                    idleBack.Visible = false;
+                    idleSide.Visible = true;
+                    runFront.Visible = false;
+                    runBack.Visible = false;
+                    runSide.Visible = false;
+                    attackBack.Visible = false;
+                    attackFront.Visible = false;
+                    attackSide.Visible = false;
+                    idleSide.Play("idleSide");
+                    idleSide.FlippedX = true;
+                    movement = false;
+                    //direction = FacingPosition.Left;
+                }
+                else if (Global.PlayerSession.Controller.Button("Right").Released)
+                {
+                    idleFront.Visible = false;
+                    idleBack.Visible = false;
+                    idleSide.Visible = true;
+                    runFront.Visible = false;
+                    runBack.Visible = false;
+                    runSide.Visible = false;
+                    attackBack.Visible = false;
+                    attackFront.Visible = false;
+                    attackSide.Visible = false;
+                    idleSide.Play("idleSide");
+                    idleSide.FlippedX = false;
+                    movement = false;
+                    //direction = FacingPosition.Left;
+                }
+                else if (Global.PlayerSession.Controller.Button("Up").Released)
+                {
+                    idleFront.Visible = false;
+                    idleBack.Visible = true;
+                    idleSide.Visible = false;
+                    runFront.Visible = false;
+                    runBack.Visible = false;
+                    runSide.Visible = false;
+                    attackBack.Visible = false;
+                    attackFront.Visible = false;
+                    attackSide.Visible = false;
+                    idleBack.Play("idleBack");
+                    movement = false;
+                    //runSide.FlippedX = false;
+                    //direction = FacingPosition.Front;
+                }
+                else if (Global.PlayerSession.Controller.Button("Down").Released)
+                {
+                    idleFront.Visible = true;
+                    idleBack.Visible = false;
+                    idleSide.Visible = false;
+                    runFront.Visible = false;
+                    runBack.Visible = false;
+                    runSide.Visible = false;
+                    attackBack.Visible = false;
+                    attackFront.Visible = false;
+                    attackSide.Visible = false;
+                    idleFront.Play("idleFront");
+                    movement = false;
+                    //runSide.FlippedX = false;
+                    //direction = FacingPosition.Back;
+                }
+            }
+            if (movement == true)
+            {
+                // Add walking particles
+                float particleXBuffer = 0;
+                float particleYBuffer = 0;
+                switch (direction)
+                {
+                    case FacingPosition.Front:
+                        {
+                            particleXBuffer = Otter.Rand.Float(8, 24);
+                            particleYBuffer = Otter.Rand.Float(0, 5);
+                            Global.Joc.Scene.Add(new WalkParticle(X + 20 + particleXBuffer, Y + 40));
+                            break;
+                        }
+                    case FacingPosition.Back:
+                        {
+                            particleXBuffer = Otter.Rand.Float(8, 24);
+                            Global.Joc.Scene.Add(new WalkParticle(X + 20 + particleXBuffer, Y - 5));
+                            break;
+                        }
+                    case FacingPosition.Left:
+                        {
+                            particleYBuffer = Otter.Rand.Float(-5, 5);
+                            Global.Joc.Scene.Add(new WalkParticle(X + 48, Y + 40 + particleYBuffer));
+                            break;
+                        }
+                    case FacingPosition.Right:
+                        {
+                            particleYBuffer = Otter.Rand.Float(-5, 5);
+                            Global.Joc.Scene.Add(new WalkParticle(X + 3, Y + 40 + particleYBuffer));
+                            break;
+                        }
+                }
+            }
+            if (Global.PlayerSession.Controller.Button("Up").Down && Global.PlayerSession.Controller.Button("Left").Down
+                || Global.PlayerSession.Controller.Button("Up").Down && Global.PlayerSession.Controller.Button("Right").Down
+                || Global.PlayerSession.Controller.Button("Down").Down && Global.PlayerSession.Controller.Button("Left").Down
+                || Global.PlayerSession.Controller.Button("Down").Down && Global.PlayerSession.Controller.Button("Right").Down) { }
+            //{
+            //    X += xSpeed / DIAGONAL_SPEED;
+            //    Y += ySpeed / DIAGONAL_SPEED;
+            //}
+            //else
+            //{
+            //    X += xSpeed;
+            //    Y += ySpeed;
+            //}
+
+
+
+        }
+    }
+}
