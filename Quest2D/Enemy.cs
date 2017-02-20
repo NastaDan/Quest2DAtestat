@@ -61,9 +61,17 @@ namespace Quest2D.Entities
         {
             base.Update();
             
-            if(Collider.Overlap(X, Y, Global.Type.PLAYER ))
+            if(Collider.Overlap(X, Y, Global.Type.ATTACKINGPLAYER ))
             {
-                
+                if(Global.attacking == true)
+                {
+                    Console.Write("test");
+                    health--;
+                    if(health<=0)
+                    {
+                        RemoveSelf();
+                    }
+                }
 
             }
             MuffinwalkSide.FlippedX = direction;

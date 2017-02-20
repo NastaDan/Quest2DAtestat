@@ -42,6 +42,7 @@ namespace Quest2D.Entities
         Spritemap<string> attackSide = new Spritemap<string>("Assets/attackSide.png", 162, 121);
         FacingPosition direction = FacingPosition.Idle;
         BoxCollider player = new BoxCollider(65, 81, Global.Type.PLAYER);
+        BoxCollider playerattacking = new BoxCollider(140, 130, Global.Type.PLAYER);
         public Player(float x = 0, float y = 0)
         {
             X = x;
@@ -69,14 +70,16 @@ namespace Quest2D.Entities
             idleFront.Play("idleFront");
 
             SetHitbox(65, 81, (int)Global.Type.PLAYER);
-            AddColliders(player);
+            SetHitbox(140, 130, (int)Global.Type.ATTACKINGPLAYER);
+            AddColliders(player, playerattacking);
+            SetCollider(player);
             player.CenterOrigin();
 
         }
         public override void Update()
         {
             base.Update();
-
+            SetCollider(playerattacking);
             if (Global.PlayerSession.Controller.Button("Attack").Pressed)
             {
                 idleFront.Visible = false;
@@ -162,7 +165,7 @@ namespace Quest2D.Entities
             }
             if (Global.PlayerSession.Controller.Button("Attack").Released)
             {
-
+                SetCollider(player);
                 switch (direction)
                 {
                     case FacingPosition.Front:
