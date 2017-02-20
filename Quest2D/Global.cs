@@ -14,6 +14,7 @@ namespace Quest2D
         public static Game Joc = null;
         public static Session PlayerSession;
         public static Player player = null;
+        public static bool attacking = false;
         public static CameraShaker camShaker = new CameraShaker();
         public enum Type
         {

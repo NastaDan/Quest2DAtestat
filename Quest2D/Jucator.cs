@@ -15,7 +15,7 @@ namespace Quest2D.Entities
     {
         public float MoveSpeed = 4.0f;
         public const float DIAGONAL_SPEED = 1.4f;
-        public bool attacking = false;
+//        public bool attacking = false;
         public bool movement = false;
         public float animationSpeed = 7;
         public float animationSpeed2 = 4;
@@ -41,7 +41,7 @@ namespace Quest2D.Entities
         Spritemap<string> attackFront = new Spritemap<string>("Assets/attackFront.png", 124, 147);
         Spritemap<string> attackSide = new Spritemap<string>("Assets/attackSide.png", 162, 121);
         FacingPosition direction = FacingPosition.Idle;
-
+        BoxCollider player = new BoxCollider(65, 81, Global.Type.PLAYER);
         public Player(float x = 0, float y = 0)
         {
             X = x;
@@ -69,7 +69,9 @@ namespace Quest2D.Entities
             idleFront.Play("idleFront");
 
             SetHitbox(65, 81, (int)Global.Type.PLAYER);
-            SetHitbox(142, 134, (int)Global.Type.ATTACKINGPLAYER);
+            AddColliders(player);
+            player.CenterOrigin();
+
         }
         public override void Update()
         {
@@ -92,7 +94,7 @@ namespace Quest2D.Entities
                 {
                     case FacingPosition.Front:
                         {
-                            attacking = true;
+                            Global.attacking = true;
                             idleFront.Visible = false;
                             idleBack.Visible = false;
                             idleSide.Visible = false;
@@ -108,7 +110,7 @@ namespace Quest2D.Entities
                         }
                     case FacingPosition.Back:
                         {
-                            attacking = true;
+                            Global.attacking = true;
                             idleFront.Visible = false;
                             idleBack.Visible = false;
                             idleSide.Visible = false;
@@ -124,7 +126,7 @@ namespace Quest2D.Entities
                         }
                     case FacingPosition.Left:
                         {
-                            attacking = true;
+                            Global.attacking = true;
                             idleFront.Visible = false;
                             idleBack.Visible = false;
                             idleSide.Visible = false;
@@ -141,7 +143,7 @@ namespace Quest2D.Entities
                         }
                     case FacingPosition.Right:
                         {
-                            attacking = true;
+                            Global.attacking = true;
                             idleFront.Visible = false;
                             idleBack.Visible = false;
                             idleSide.Visible = false;
@@ -165,7 +167,7 @@ namespace Quest2D.Entities
                 {
                     case FacingPosition.Front:
                         {
-                            attacking = false;
+                            Global.attacking = false;
                             idleFront.Visible = false;
                             idleBack.Visible = true;
                             idleSide.Visible = false;
@@ -180,7 +182,7 @@ namespace Quest2D.Entities
                         }
                     case FacingPosition.Back:
                         {
-                            attacking = false;
+                            Global.attacking = false;
                             idleFront.Visible = true;
                             idleBack.Visible = false;
                             idleSide.Visible = false;
@@ -195,7 +197,7 @@ namespace Quest2D.Entities
                         }
                     case FacingPosition.Left:
                         {
-                            attacking = false;
+                            Global.attacking = false;
                             idleFront.Visible = false;
                             idleBack.Visible = false;
                             idleSide.Visible = true;
@@ -211,7 +213,7 @@ namespace Quest2D.Entities
                         }
                     case FacingPosition.Right:
                         {
-                            attacking = false;
+                            Global.attacking = false;
                             idleFront.Visible = false;
                             idleBack.Visible = false;
                             idleSide.Visible = true;
@@ -228,7 +230,7 @@ namespace Quest2D.Entities
                 }
             }
 
-            if (attacking == false)
+            if (Global.attacking == false)
             {
                 if (Global.PlayerSession.Controller.Button("Up").Down)
                 {
