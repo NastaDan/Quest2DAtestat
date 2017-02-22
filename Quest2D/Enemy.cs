@@ -60,7 +60,6 @@ namespace Quest2D.Entities
         public override void Update()
         {
             base.Update();
-            
             if(Collider.Overlap(X, Y, Global.Type.ATTACKINGPLAYER ))
             {
                 if(Global.attacking == true)
