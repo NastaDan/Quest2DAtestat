@@ -57,6 +57,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CameraShaker.cs" />
+    <Compile Include="DamageText.cs" />
     <Compile Include="Enemy.cs" />
     <Compile Include="Gamescene.cs" />
     <Compile Include="Global.cs" />

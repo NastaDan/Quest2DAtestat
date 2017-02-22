@@ -17,6 +17,7 @@ namespace Quest2D
             Add(Global.player);
             Add(Global.camShaker);
             Add(new Enemy(1600, 750));
+            Add(new Enemy(600, 350));
         }
     }
 }

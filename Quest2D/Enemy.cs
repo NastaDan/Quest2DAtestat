@@ -15,12 +15,11 @@ namespace Quest2D.Entities
         public const float DEFAULT_SPEED = 3.4f;
 
         public const int DEFAULT_HEALTH = 4;
-        public int health = 1;
+        public int health = 4;
         public float speed = 1f;
         public float animationSpeed = 7;
         public float animationSpeed2 = 4;
         public const float MOVE_DISTANCE = 600;
-
         public bool direction = true;
         public float distMoved = 0f;
 
@@ -57,22 +56,41 @@ namespace Quest2D.Entities
             AddCollider(collider);
             collider.CenterOrigin();
         }
+        public void Death()
+        {
+            MuffinidleBack.Alpha -= 0.25f;
+            MuffinidleFront.Alpha -= 0.25f;
+            MuffinidleSide.Alpha -= 0.25f;
+            MuffinwalkBack.Alpha -= 0.25f;
+            MuffinwalkFront.Alpha -= 0.25f;
+            MuffinwalkSide.Alpha -= 0.25f;
+            if(MuffinidleBack.Alpha == 0  ||MuffinidleFront.Alpha == 0 ||  MuffinidleSide.Alpha ==0 || MuffinwalkBack.Alpha==0 || MuffinwalkFront.Alpha==0|| MuffinwalkSide.Alpha==0)
+            {
+                 RemoveSelf();
+            }
+        }
+
         public override void Update()
         {
             base.Update();
-            if(Collider.Overlap(X, Y, Global.Type.ATTACKINGPLAYER ))
+
+            if(Collider.Overlap(X, Y, Global.Type.PLAYER))
             {
                 if(Global.attacking == true)
                 {
-                    Console.Write("test");
                     health--;
+                    Global.camShaker.ShakeCamera();
+                    DamageText dt = new DamageText(X, Y, "30");
+                    Console.Write(health);
+                    Global.Joc.Scene.Add(dt);
                     if(health<=0)
                     {
-                        RemoveSelf();
+                        Death();
                     }
                 }
 
             }
+
             MuffinwalkSide.FlippedX = direction;
             if (direction)
             {
