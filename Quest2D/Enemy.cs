@@ -78,6 +78,7 @@ namespace Quest2D.Entities
             {
                 if(Global.attacking == true)
                 {
+
                     health--;
                     Global.camShaker.ShakeCamera();
                     DamageText dt = new DamageText(X, Y, "30");

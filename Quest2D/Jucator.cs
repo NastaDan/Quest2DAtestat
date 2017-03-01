@@ -13,12 +13,14 @@ namespace Quest2D.Entities
 
     public class Player : Entity
     {
-        public float MoveSpeed = 4.0f;
+        public float MoveSpeed = 6.0f;
         public const float DIAGONAL_SPEED = 1.4f;
 //        public bool attacking = false;
         public bool movement = false;
         public float animationSpeed = 7;
         public float animationSpeed2 = 4;
+        public const int WIDTH = 65;
+        public const int HEIGHT = 81;
 
 
 
@@ -80,6 +82,13 @@ namespace Quest2D.Entities
         {
             base.Update();
             SetCollider(playerattacking);
+            float xSpeed = 0;
+            float ySpeed = 0;
+            float newX;
+            float newY;
+            GameScene checkScene = (GameScene)Scene;
+
+
             if (Global.PlayerSession.Controller.Button("Attack").Pressed)
             {
                 idleFront.Visible = false;
@@ -237,19 +246,36 @@ namespace Quest2D.Entities
             {
                 if (Global.PlayerSession.Controller.Button("Up").Down)
                 {
-                    Y -= MoveSpeed;
+                    newY = Y - MoveSpeed;
+                    if (!checkScene.grid.GetRect(X, newY, X + WIDTH, newY + HEIGHT, false))
+                    {
+                        ySpeed = -MoveSpeed;
+                    }
+
                 }
                 if (Global.PlayerSession.Controller.Button("Left").Down)
                 {
-                    X -= MoveSpeed;
+                    newX = X - MoveSpeed;
+                    if (!checkScene.grid.GetRect(newX, Y, newX + WIDTH, Y + HEIGHT, false))
+                    {
+                        xSpeed = -MoveSpeed;
+                    }
                 }
                 if (Global.PlayerSession.Controller.Button("Right").Down)
                 {
-                    X += MoveSpeed;
+                    newX = X + MoveSpeed;
+                    if (!checkScene.grid.GetRect(newX, Y, newX + WIDTH, Y + HEIGHT, false))
+                    {
+                        xSpeed = MoveSpeed;
+                    }
                 }
                 if (Global.PlayerSession.Controller.Button("Down").Down)
                 {
-                    Y += MoveSpeed;
+                    newY = Y + MoveSpeed;
+                    if (!checkScene.grid.GetRect(X, newY, X + WIDTH, newY + HEIGHT, false))
+                    {
+                        ySpeed = MoveSpeed;
+                    }
                 }
 
                 if (Global.PlayerSession.Controller.Button("Left").Pressed)
@@ -419,16 +445,17 @@ namespace Quest2D.Entities
             if (Global.PlayerSession.Controller.Button("Up").Down && Global.PlayerSession.Controller.Button("Left").Down
                 || Global.PlayerSession.Controller.Button("Up").Down && Global.PlayerSession.Controller.Button("Right").Down
                 || Global.PlayerSession.Controller.Button("Down").Down && Global.PlayerSession.Controller.Button("Left").Down
-                || Global.PlayerSession.Controller.Button("Down").Down && Global.PlayerSession.Controller.Button("Right").Down) { }
-            //{
-            //    X += xSpeed / DIAGONAL_SPEED;
-            //    Y += ySpeed / DIAGONAL_SPEED;
-            //}
-            //else
-            //{
-            //    X += xSpeed;
-            //    Y += ySpeed;
-            //}
+                || Global.PlayerSession.Controller.Button("Down").Down && Global.PlayerSession.Controller.Button("Right").Down)
+            {
+                X += xSpeed / DIAGONAL_SPEED;
+                Y += ySpeed / DIAGONAL_SPEED;
+            }
+            else
+            {
+                    X += xSpeed;
+                    Y += ySpeed;
+            }
+
 
 
 
