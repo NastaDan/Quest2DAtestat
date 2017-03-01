@@ -10,6 +10,7 @@ namespace Quest2D
     public class GameScene : Scene
     {
         public Tilemap Tilemap = null;
+        public Tilemap Coins = null;
         public GridCollider grid = null;
 
         public GameScene()
@@ -22,12 +23,14 @@ namespace Quest2D
             Add(new Enemy(1600, 750));
             Add(new Enemy(600, 350));
             Tilemap = new Tilemap ("Assets/sokoban_tilesheet.png", Game.Instance.Width, Game.Instance.Height, Global.GRID_HEIGHT, Global.GRID_WIDTH);
+            Coins = new Tilemap("Assets/sokoban_tilesheet.png", Game.Instance.Width, Game.Instance.Height, Global.GRID_HEIGHT, Global.GRID_WIDTH);
             grid = new GridCollider(Game.Instance.Width, Game.Instance.Height, Global.GRID_WIDTH, Global.GRID_HEIGHT);
             Entity gridEntity = new Entity(0, 0, null, grid);
-            AddGraphic(Tilemap);
+            AddGraphics(Tilemap, Coins);
             Tilemap.SetRect(0, 0, Global.GRID_WIDTH, Global.GRID_HEIGHT, 85);
             Tilemap.SetRect(1, 0, Global.GRID_WIDTH, Global.GRID_HEIGHT, 102);
             Tilemap.SetRect(4, 4, 3, 2, 101);
+            Coins.SetTile(6, 6, 75);
             grid.SetRect(4, 4, 3, 2, true);
             for (i = 1; i<= 16; i++)
             {
