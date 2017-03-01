@@ -16,48 +16,23 @@ namespace Quest2D
         {
            
             Global.player = new Player(500, 500);
-
+            int i;
             Add(Global.player);
             Add(Global.camShaker);
             Add(new Enemy(1600, 750));
             Add(new Enemy(600, 350));
-            Tilemap = new Tilemap ("Assets/Tiles.png", Game.Instance.Width, Game.Instance.Height, Global.GRID_HEIGHT, Global.GRID_WIDTH);
+            Tilemap = new Tilemap ("Assets/sokoban_tilesheet.png", Game.Instance.Width, Game.Instance.Height, Global.GRID_HEIGHT, Global.GRID_WIDTH);
             grid = new GridCollider(Game.Instance.Width, Game.Instance.Height, Global.GRID_WIDTH, Global.GRID_HEIGHT);
             Entity gridEntity = new Entity(0, 0, null, grid);
             AddGraphic(Tilemap);
-            Tilemap.SetTile(0, 0, 0);
-            grid.SetTile(0, 0, true);
-            Tilemap.SetTile(1, 0, 0);
-            grid.SetTile(1, 0, true);
-            Tilemap.SetTile(2, 0, 0);
-            grid.SetTile(2, 0, true);
-
-            // Place some more tiles.
-            Tilemap.SetTile(0, 4, 1);
-            grid.SetTile(0, 4, true);
-            Tilemap.SetTile(1, 4, 1);
-            grid.SetTile(1, 4, true);
-            Tilemap.SetTile(2, 4, 1);
-            grid.SetTile(2, 4, true);
-            Tilemap.SetTile(30, 30, 3);
-            grid.SetTile(30, 30, true);
-            // Even more tiles.
-            Tilemap.SetTile(0, 8, 2);
-            grid.SetTile(0, 8, true);
-            Tilemap.SetTile(1, 8, 2);
-            grid.SetTile(1, 8, true);
-            grid.SetTile(2, 8, true);
-            Tilemap.SetTile(2, 8, 2);
-            grid.SetTile(0, 12, true);
-            Tilemap.SetTile(0, 12, 3);
-            grid.SetTile(1, 12, true);
-            Tilemap.SetTile(1, 12, 3);
-            grid.SetTile(2, 12, true);
-            Tilemap.SetTile(2, 12, 3);
-            Tilemap.SetTile(30, 31, 1);
-            grid.SetTile(30, 31, true);
-
-
+            Tilemap.SetRect(0, 0, Global.GRID_WIDTH, Global.GRID_HEIGHT, 85);
+            Tilemap.SetRect(1, 0, Global.GRID_WIDTH, Global.GRID_HEIGHT, 102);
+            Tilemap.SetRect(4, 4, 3, 2, 101);
+            grid.SetRect(4, 4, 3, 2, true);
+            for (i = 1; i<= 16; i++)
+            {
+                grid.SetTile(0, i, true);
+            }
         }
 
     }

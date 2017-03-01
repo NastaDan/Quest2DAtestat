@@ -16,8 +16,8 @@ namespace Quest2D
         public static Player player = null;
         public static bool attacking = false;
 
-        public const int GRID_WIDTH = 32;
-        public const int GRID_HEIGHT = 32;
+        public const int GRID_WIDTH = 64;
+        public const int GRID_HEIGHT = 64;
         public static CameraShaker camShaker = new CameraShaker();
         public enum Type
         {

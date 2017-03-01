@@ -12,9 +12,9 @@ namespace Quest2D
     {
         static void Main(string[] args)
         {
-            Global.Joc = new Game("Quest2D", 1920, 1080, 60, false);
+            Global.Joc = new Game("Quest2D", 1920, 1080, 60, true);
 
-            Global.Joc.Color.SetColor(Color.Gold);
+            Global.Joc.Color.SetColor(Color.Red);
 
             Global.Joc.FirstScene = new TitleScene();
             Global.PlayerSession = Global.Joc.AddSession("Player");
