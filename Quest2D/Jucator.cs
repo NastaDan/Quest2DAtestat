@@ -100,6 +100,7 @@ namespace Quest2D.Entities
                 attackBack.Visible = false;
                 attackFront.Visible = false;
                 attackSide.Visible = false;
+                movement = false;
                 Global.camShaker.ShakeCamera();
                 switch (direction)
 
@@ -343,7 +344,7 @@ namespace Quest2D.Entities
                     direction = FacingPosition.Back;
                 }
 
-                else if (Global.PlayerSession.Controller.Button("Left").Released)
+                else if (Global.PlayerSession.Controller.Button("Left").Released && movement==false)
                 {
                     idleFront.Visible = false;
                     idleBack.Visible = false;
@@ -359,7 +360,7 @@ namespace Quest2D.Entities
                     movement = false;
                     //direction = FacingPosition.Left;
                 }
-                else if (Global.PlayerSession.Controller.Button("Right").Released)
+                else if (Global.PlayerSession.Controller.Button("Right").Released && movement == false)
                 {
                     idleFront.Visible = false;
                     idleBack.Visible = false;
@@ -375,7 +376,7 @@ namespace Quest2D.Entities
                     movement = false;
                     //direction = FacingPosition.Left;
                 }
-                else if (Global.PlayerSession.Controller.Button("Up").Released)
+                else if (Global.PlayerSession.Controller.Button("Up").Released && movement == false)
                 {
                     idleFront.Visible = false;
                     idleBack.Visible = true;
@@ -391,7 +392,7 @@ namespace Quest2D.Entities
                     //runSide.FlippedX = false;
                     //direction = FacingPosition.Front;
                 }
-                else if (Global.PlayerSession.Controller.Button("Down").Released)
+                else if (Global.PlayerSession.Controller.Button("Down").Released && movement == false)
                 {
                     idleFront.Visible = true;
                     idleBack.Visible = false;

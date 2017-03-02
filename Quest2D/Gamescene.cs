@@ -30,6 +30,7 @@ namespace Quest2D
             Tilemap.SetRect(0, 0, Global.GRID_WIDTH, Global.GRID_HEIGHT, 85);
             Tilemap.SetRect(1, 0, Global.GRID_WIDTH, Global.GRID_HEIGHT, 102);
             Tilemap.SetRect(4, 4, 3, 2, 101);
+            Tilemap.SetRect(9, 12, 1, 2, 101);
             Coins.SetTile(6, 6, 75);
             grid.SetRect(4, 4, 3, 2, true);
             for (i = 1; i<= 16; i++)
