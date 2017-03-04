@@ -32,14 +32,21 @@ namespace Quest2D
                 Global.camShaker = new CameraShaker();
             }
 
-            Tilemap = new Tilemap ("Assets/sokoban_tilesheet.png", 5955, 3483, Global.GRID_HEIGHT, Global.GRID_WIDTH);
-            grid = new GridCollider(5955, 3483, Global.GRID_WIDTH, Global.GRID_HEIGHT);
-            Tilemap.SetRect(0, 0, Global.GRID_WIDTH, Global.GRID_HEIGHT, 85);
-            Tilemap.SetRect(1, 0, Global.GRID_WIDTH, Global.GRID_HEIGHT, 102);
-            Tilemap.SetRect(4, 4, 3, 2, 101);
-            Tilemap.SetRect(9, 12, 1, 2, 101);
+            Tilemap = new Tilemap ("Assets/sokoban_tilesheet.png", 5760, 2160, Global.GRID_HEIGHT, Global.GRID_WIDTH);
+            grid = new GridCollider(5760, 2160, Global.GRID_WIDTH, Global.GRID_HEIGHT);
+            Tilemap.SetRect(0, 0, 1, 34, 85);//zidul la stanga
+            Tilemap.SetRect(1, 0, 90, 1, 85); //zidul sus
+            Tilemap.SetRect(1, 33, 90, 1, 85);//zidul jos
+            Tilemap.SetRect(89, 1, 1, 33, 85); //zidul dreapta
+            Tilemap.SetRect(1, 1, 88, 32, 102); //fundal
+            Tilemap.SetRect(4, 4, 3, 2, 101);//zid random
+            Tilemap.SetRect(9, 12, 1, 2, 101);//zid random
+            grid.SetRect(9, 12, 1, 2, true);
             grid.SetRect(4, 4, 3, 2, true);
-            for (i = 1; i<= 48; i++)
+            grid.SetRect(1, 33, 94, 1, true);
+            grid.SetRect(89, 1, 1, 33, true);
+            grid.SetRect(1, 0, 90, 1, true);
+            for (i = 0; i<= 48; i++)
             {
                 grid.SetTile(0, i, true);
             }
