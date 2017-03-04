@@ -15,7 +15,8 @@ namespace Quest2D
         public static Session PlayerSession;
         public static Player player = null;
         public static bool attacking = false;
-
+        public static bool paused = false;
+        public static Music gameMusic = null;
         public const int GRID_WIDTH = 64;
         public const int GRID_HEIGHT = 64;
         public static CameraShaker camShaker = new CameraShaker();
