@@ -344,7 +344,7 @@ namespace Quest2D.Entities
                     direction = FacingPosition.Back;
                 }
 
-                else if (Global.PlayerSession.Controller.Button("Left").Released && movement==false)
+                if (Global.PlayerSession.Controller.Button("Left").Released && ySpeed == 0 && xSpeed == 0)
                 {
                     idleFront.Visible = false;
                     idleBack.Visible = false;
@@ -360,7 +360,7 @@ namespace Quest2D.Entities
                     movement = false;
                     //direction = FacingPosition.Left;
                 }
-                else if (Global.PlayerSession.Controller.Button("Right").Released && movement == false)
+                else if (Global.PlayerSession.Controller.Button("Right").Released && ySpeed == 0 && xSpeed == 0)
                 {
                     idleFront.Visible = false;
                     idleBack.Visible = false;
@@ -376,7 +376,7 @@ namespace Quest2D.Entities
                     movement = false;
                     //direction = FacingPosition.Left;
                 }
-                else if (Global.PlayerSession.Controller.Button("Up").Released && movement == false)
+                else if (Global.PlayerSession.Controller.Button("Up").Released && ySpeed == 0 && xSpeed == 0)
                 {
                     idleFront.Visible = false;
                     idleBack.Visible = true;
@@ -392,7 +392,7 @@ namespace Quest2D.Entities
                     //runSide.FlippedX = false;
                     //direction = FacingPosition.Front;
                 }
-                else if (Global.PlayerSession.Controller.Button("Down").Released && movement == false)
+                else if (Global.PlayerSession.Controller.Button("Down").Released && ySpeed == 0 && xSpeed == 0)
                 {
                     idleFront.Visible = true;
                     idleBack.Visible = false;

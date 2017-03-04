@@ -22,16 +22,15 @@ namespace Quest2D
             Add(Global.camShaker);
             Add(new Enemy(1600, 750));
             Add(new Enemy(600, 350));
-            Tilemap = new Tilemap ("Assets/sokoban_tilesheet.png", Game.Instance.Width, Game.Instance.Height, Global.GRID_HEIGHT, Global.GRID_WIDTH);
-            Coins = new Tilemap("Assets/sokoban_tilesheet.png", Game.Instance.Width, Game.Instance.Height, Global.GRID_HEIGHT, Global.GRID_WIDTH);
-            grid = new GridCollider(Game.Instance.Width, Game.Instance.Height, Global.GRID_WIDTH, Global.GRID_HEIGHT);
+            Tilemap = new Tilemap ("Assets/sokoban_tilesheet.png", 5760, 3240, Global.GRID_HEIGHT, Global.GRID_WIDTH);
+            Coins = new Tilemap("Assets/sokoban_tilesheet.png", 5760, 3240, Global.GRID_HEIGHT, Global.GRID_WIDTH);
+            grid = new GridCollider(5760, 3240, Global.GRID_WIDTH, Global.GRID_HEIGHT);
             Entity gridEntity = new Entity(0, 0, null, grid);
             AddGraphics(Tilemap, Coins);
             Tilemap.SetRect(0, 0, Global.GRID_WIDTH, Global.GRID_HEIGHT, 85);
             Tilemap.SetRect(1, 0, Global.GRID_WIDTH, Global.GRID_HEIGHT, 102);
             Tilemap.SetRect(4, 4, 3, 2, 101);
             Tilemap.SetRect(9, 12, 1, 2, 101);
-            Coins.SetTile(6, 6, 75);
             grid.SetRect(4, 4, 3, 2, true);
             for (i = 1; i<= 16; i++)
             {
