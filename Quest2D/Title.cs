@@ -15,6 +15,7 @@ namespace Quest2D
         public Text enterText = new Text("Press Enter", "Little Kid.otf", 120);
         public const float TIMER_BLINK = 30f;
         public float blinkTimer = 0;
+        public Image darkScreen = Image.CreateRectangle(1920, 1080, new Otter.Color("000000"));
         public Music titleSong = new Music("Sounds/title.ogg", true);
         public TitleScene()
         {
@@ -28,6 +29,8 @@ namespace Quest2D
             enterText.Y = Global.Joc.Height - 300;
             this.AddGraphic(enterText);
             titleSong.Play();
+            darkScreen.Alpha = 0;
+            this.AddGraphic(darkScreen);
         }
 
         public override void Update()
@@ -39,12 +42,16 @@ namespace Quest2D
                 enterText.Visible = !enterText.Visible;
                 blinkTimer = 0;
             }
-            if(Global.PlayerSession.Controller.Button("Start").Pressed)
+            if (Global.PlayerSession.Controller.Button("Start").Pressed)
             {
-                titleSong.Stop();
-                Global.Joc.RemoveScene();
-                Global.Joc.AddScene(new GameScene());
+                Tweener.Tween(darkScreen, new { Alpha = 1 }, 30f, 0).OnComplete(PlayGame);
             }
+        }
+        private void PlayGame()
+        {
+            titleSong.Stop();
+            Global.Joc.RemoveScene();
+            Global.Joc.AddScene(new GameScene());
         }
     }
 }

@@ -15,7 +15,6 @@ namespace Quest2D.Entities
     {
         public float MoveSpeed = 6.0f;
         public const float DIAGONAL_SPEED = 1.4f;
-//        public bool attacking = false;
         public bool movement = false;
         public float animationSpeed = 7;
         public float animationSpeed2 = 4;
