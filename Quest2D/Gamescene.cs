@@ -38,10 +38,10 @@ namespace Quest2D
             Tilemap.SetRect(1, 0, 90, 1, 85); //zidul sus
             Tilemap.SetRect(1, 33, 90, 1, 85);//zidul jos
             Tilemap.SetRect(89, 1, 1, 33, 85); //zidul dreapta
-            Tilemap.SetRect(1, 1, 88, 32, 102); //fundal
+            Tilemap.SetRect(1, 1, 88, 32, 89); //fundal
             Tilemap.SetRect(4, 4, 3, 2, 101);//zid random
             Tilemap.SetRect(9, 12, 1, 2, 101);//zid random
-            Tilemap.SetRect(30, 1, 30, 16, 103);
+            Tilemap.SetRect(30, 1, 30, 16, 90);
             grid.SetRect(9, 12, 1, 2, true);
             grid.SetRect(4, 4, 3, 2, true);
             grid.SetRect(1, 33, 94, 1, true);
@@ -53,11 +53,11 @@ namespace Quest2D
             }
             for(j = 1; j <= 16; j = j + 2)
             {
-                Tilemap.SetTile(29, j, 103);
+                Tilemap.SetTile(29, j, 90);
             }
             for (j = 2; j <= 17; j = j + 2)
             {
-                Tilemap.SetTile(30, j, 102);
+                Tilemap.SetTile(30, j, 89);
             }
         }
         public override void Begin()
