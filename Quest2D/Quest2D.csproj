@@ -74,6 +74,7 @@
     <Compile Include="Enemy.cs" />
     <Compile Include="Gamescene.cs" />
     <Compile Include="Global.cs" />
+    <Compile Include="HelpScene.cs" />
     <Compile Include="Jucator.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
