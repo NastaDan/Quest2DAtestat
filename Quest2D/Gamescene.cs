@@ -16,7 +16,7 @@ namespace Quest2D
         public int screenI;
         public GameScene(int nextJ = 0, int nextI = 0, Player player = null) : base()
         {
-            int i;
+            int i,j;
             screenJ = nextJ;
             screenI = nextI;
             if (player == null)
@@ -41,6 +41,7 @@ namespace Quest2D
             Tilemap.SetRect(1, 1, 88, 32, 102); //fundal
             Tilemap.SetRect(4, 4, 3, 2, 101);//zid random
             Tilemap.SetRect(9, 12, 1, 2, 101);//zid random
+            Tilemap.SetRect(30, 1, 30, 16, 103);
             grid.SetRect(9, 12, 1, 2, true);
             grid.SetRect(4, 4, 3, 2, true);
             grid.SetRect(1, 33, 94, 1, true);
@@ -49,6 +50,14 @@ namespace Quest2D
             for (i = 0; i<= 48; i++)
             {
                 grid.SetTile(0, i, true);
+            }
+            for(j = 1; j <= 16; j = j + 2)
+            {
+                Tilemap.SetTile(29, j, 103);
+            }
+            for (j = 2; j <= 17; j = j + 2)
+            {
+                Tilemap.SetTile(30, j, 102);
             }
         }
         public override void Begin()
