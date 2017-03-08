@@ -10,7 +10,7 @@ namespace Quest2D
 {
     public class TitleScene : Scene
     {
-        public Image titleImage = new Image("placeholder.png");
+        public Image titleImage = new Image("fundal.png");
         public Text titleText = new Text("Quest 2D", "Little Kid.otf", 280);
         public Text enterText = new Text("Press Enter", "Little Kid.otf", 120);
         public Text helpText = new Text("Press Delete for help", "Little Kid.otf", 120);

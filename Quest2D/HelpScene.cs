@@ -10,14 +10,18 @@ namespace Quest2D
 {
     class HelpScene : Scene
     {
+        public Image titleImage = new Image("fundal2.png");
         public Text helpText = new Text("Instructions", "Little Kid.otf", 256);
         public Text returnText = new Text("Return  to menu", "Little Kid.otf", 120);
         public Image darkScreen = Image.CreateRectangle(1920, 1080, new Otter.Color("000000"));
         public const float TIMER_BLINK = 30f;
         public float blinkTimer = 0;
+        
+        
 
         public HelpScene()
         {
+            AddGraphic(titleImage);
             AddGraphic(helpText);
             AddGraphic(returnText);
             returnText.CenterOrigin();

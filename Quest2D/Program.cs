@@ -15,7 +15,6 @@ namespace Quest2D
             Global.Joc = new Game("Quest2D", 1920, 1080, 60, true);
 
             Global.Joc.Color.SetColor(Color.Red);
-
             Global.Joc.FirstScene = new TitleScene();
             Global.PlayerSession = Global.Joc.AddSession("Player");
             Global.PlayerSession.Controller.AddButton("Start");

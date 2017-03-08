@@ -7,6 +7,7 @@ using System.Text;
 
 namespace Quest2D
 {
+
     public class GameScene : Scene
     {
         public Tilemap Tilemap = null;
@@ -14,11 +15,14 @@ namespace Quest2D
         public Scene nextScene;
         public int screenJ;
         public int screenI;
+        
+        
         public GameScene(int nextJ = 0, int nextI = 0, Player player = null) : base()
         {
             int i,j;
             screenJ = nextJ;
             screenI = nextI;
+
             if (player == null)
             {
                 Global.player = new Player(500, 500); 
