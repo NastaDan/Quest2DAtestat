@@ -18,7 +18,7 @@ namespace Quest2D.Entities
         public bool movement = false;
         public float animationSpeed = 7;
         public float animationSpeed2 = 4;
-        public const int WIDTH = 65;
+        public const int WIDTH = 60;
         public const int HEIGHT = 81;
 
 
@@ -42,7 +42,7 @@ namespace Quest2D.Entities
         Spritemap<string> attackFront = new Spritemap<string>("Assets/attackFront.png", 124, 147);
         Spritemap<string> attackSide = new Spritemap<string>("Assets/attackSide.png", 162, 121);
         FacingPosition direction = FacingPosition.Idle;
-        BoxCollider player = new BoxCollider(65, 81, Global.Type.PLAYER);
+        BoxCollider player = new BoxCollider(63, 81, Global.Type.PLAYER);
         BoxCollider playerattacking = new BoxCollider(140, 130, Global.Type.PLAYER);
         public Player(float x = 0, float y = 0)
         {
@@ -70,7 +70,7 @@ namespace Quest2D.Entities
             attackSide.Visible = false;
             idleFront.Play("idleFront");
 
-            SetHitbox(65, 81, (int)Global.Type.PLAYER);
+            SetHitbox(63, 81, (int)Global.Type.PLAYER);
             SetHitbox(140, 130, (int)Global.Type.ATTACKINGPLAYER);
             AddColliders(player, playerattacking);
             SetCollider(player);

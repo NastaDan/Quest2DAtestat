@@ -85,6 +85,9 @@
     <None Include="App.config" />
     <None Include="Assets\dimensiuni" />
     <None Include="Assets\dimensiuniMuffin" />
+    <None Include="Assets\Nivel.oel">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Little Kid.otf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

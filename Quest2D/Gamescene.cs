@@ -4,6 +4,7 @@ using Quest2D.Util;
 using Quest2D;
 using System;
 using System.Text;
+using System.IO;
 
 namespace Quest2D
 {
@@ -14,14 +15,29 @@ namespace Quest2D
         public GridCollider grid = null;
         public Scene nextScene;
         public int screenJ;
-        public int screenI;
+        public int screenI; 
         
         
         public GameScene(int nextJ = 0, int nextI = 0, Player player = null) : base()
         {
-            int i,j;
             screenJ = nextJ;
             screenI = nextI;
+
+
+            String input =  File.ReadAllText("Assets/Nivel.oel");
+            int i = 0, j = 0;
+            int[,] result = new int[100, 100];
+            foreach (var row in input.Split('\n'))
+            {
+                j = 0;
+                foreach (var col in row.Trim().Split(' '))
+                {
+                    result[i, j] = int.Parse(col.Trim());
+                    j++;
+                }
+                i++;
+            }
+
 
             if (player == null)
             {
@@ -43,11 +59,11 @@ namespace Quest2D
             Tilemap.SetRect(1, 33, 90, 1, 85);//zidul jos
             Tilemap.SetRect(89, 1, 1, 33, 85); //zidul dreapta
             Tilemap.SetRect(1, 1, 88, 32, 89); //fundal
-            Tilemap.SetRect(4, 4, 3, 2, 101);//zid random
-            Tilemap.SetRect(9, 12, 1, 2, 101);//zid random
+            /*Tilemap.SetRect(4, 4, 3, 2, 101);*///zid random
+            /*Tilemap.SetRect(9, 12, 1, 2, 101);*///zid random
             Tilemap.SetRect(30, 1, 30, 16, 90);
-            grid.SetRect(9, 12, 1, 2, true);
-            grid.SetRect(4, 4, 3, 2, true);
+            //grid.SetRect(9, 12, 1, 2, true);
+            //grid.SetRect(4, 4, 3, 2, true);
             grid.SetRect(1, 33, 94, 1, true);
             grid.SetRect(89, 1, 1, 33, true);
             grid.SetRect(1, 0, 90, 1, true);
@@ -63,6 +79,24 @@ namespace Quest2D
             {
                 Tilemap.SetTile(30, j, 89);
             }
+
+
+
+
+
+            for(i=1; i<=34; i++)
+            {
+                for(j=1; j<=89; j++)
+                {
+                    if (result[i, j] == 1)
+                    {
+                        grid.SetTile(j, i, true);
+                        Tilemap.SetTile(j, i, 100);
+                    }
+                }
+            }
+
+
         }
         public override void Begin()
         {
