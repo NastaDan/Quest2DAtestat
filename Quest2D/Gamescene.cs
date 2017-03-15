@@ -62,27 +62,16 @@ namespace Quest2D
             /*Tilemap.SetRect(4, 4, 3, 2, 101);*///zid random
             /*Tilemap.SetRect(9, 12, 1, 2, 101);*///zid random
             Tilemap.SetRect(30, 1, 30, 16, 90);
-            //grid.SetRect(9, 12, 1, 2, true);
-            //grid.SetRect(4, 4, 3, 2, true);
             grid.SetRect(1, 33, 94, 1, true);
             grid.SetRect(89, 1, 1, 33, true);
             grid.SetRect(1, 0, 90, 1, true);
+            Tilemap.SetRect(29, 9, 1, 2, 88);
+            Tilemap.SetRect(59, 14, 1, 2, 88);
+            Tilemap.SetRect(60, 17, 30, 17, 90);
             for (i = 0; i<= 48; i++)
             {
                 grid.SetTile(0, i, true);
             }
-            for(j = 1; j <= 16; j = j + 2)
-            {
-                Tilemap.SetTile(29, j, 90);
-            }
-            for (j = 2; j <= 17; j = j + 2)
-            {
-                Tilemap.SetTile(30, j, 89);
-            }
-
-
-
-
 
             for(i=1; i<=34; i++)
             {
@@ -91,7 +80,46 @@ namespace Quest2D
                     if (result[i, j] == 1)
                     {
                         grid.SetTile(j, i, true);
-                        Tilemap.SetTile(j, i, 100);
+                    }
+                }
+            }
+            for (i = 1; i <= 17; i++)
+            {
+                for (j = 1; j <= 29; j++)
+                {
+                    if (result[i, j] == 1)
+                    {
+                        Tilemap.SetTile(j, i, 103);
+                    }
+                }
+            }
+            for (i = 1; i <=17 ; i++)
+            {
+                for (j = 30; j <= 59; j++)
+                {
+                    if (result[i, j] == 1)
+                    {
+                        Tilemap.SetTile(j, i, 102);
+                    }
+                }
+            }
+            for (i = 1; i <= 17; i++)
+            {
+                for (j = 60; j <= 89; j++)
+                {
+                    if (result[i, j] == 1)
+                    {
+                        Tilemap.SetTile(j, i, 103);
+                    }
+                }
+            }
+            for (i = 17; i <= 34; i++)
+            {
+                for (j = 60; j <= 89; j++)
+                {
+                    if (result[i, j] == 1)
+                    {
+                        Tilemap.SetTile(j, i, 102);
                     }
                 }
             }
