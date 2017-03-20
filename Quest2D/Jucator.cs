@@ -13,7 +13,7 @@ namespace Quest2D.Entities
 
     public class Player : Entity
     {
-        public float MoveSpeed = 7.0f;
+        public float MoveSpeed = 5.0f;
         public const float DIAGONAL_SPEED = 1.4f;
         public bool movement = false;
         public float animationSpeed = 7;

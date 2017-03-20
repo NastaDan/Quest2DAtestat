@@ -56,9 +56,9 @@ namespace Quest2D
             grid = new GridCollider(5760, 2160, Global.GRID_WIDTH, Global.GRID_HEIGHT);
             Tilemap.SetRect(0, 0, 1, 34, 85);//zidul la stanga
             Tilemap.SetRect(1, 0, 90, 1, 85); //zidul sus
-            Tilemap.SetRect(1, 33, 90, 1, 85);//zidul jos
-            Tilemap.SetRect(89, 1, 1, 33, 85); //zidul dreapta
-            Tilemap.SetRect(1, 1, 88, 32, 89); //fundal
+            Tilemap.SetRect(0, 33, 90, 1, 85);//zidul jos
+            Tilemap.SetRect(89, 1, 1, 34, 85); //zidul dreapta
+            Tilemap.SetRect(1, 1, 88, 34, 89); //fundal
             /*Tilemap.SetRect(4, 4, 3, 2, 101);*///zid random
             /*Tilemap.SetRect(9, 12, 1, 2, 101);*///zid random
             Tilemap.SetRect(30, 1, 30, 16, 90);
@@ -68,6 +68,7 @@ namespace Quest2D
             Tilemap.SetRect(29, 9, 1, 2, 88);
             Tilemap.SetRect(59, 14, 1, 2, 88);
             Tilemap.SetRect(60, 17, 30, 17, 90);
+            Tilemap.SetRect(76, 16, 2, 1, 88);
             for (i = 0; i<= 48; i++)
             {
                 grid.SetTile(0, i, true);
@@ -75,7 +76,7 @@ namespace Quest2D
 
             for(i=1; i<=34; i++)
             {
-                for(j=1; j<=89; j++)
+                for(j=1; j<=88; j++)
                 {
                     if (result[i, j] == 1)
                     {
@@ -84,6 +85,16 @@ namespace Quest2D
                 }
             }
             for (i = 1; i <= 17; i++)
+            {
+                for (j = 1; j <= 29; j++)
+                {
+                    if (result[i, j] == 1)
+                    {
+                        Tilemap.SetTile(j, i, 103);
+                    }
+                }
+            }
+            for (i = 17; i <= 32; i++)
             {
                 for (j = 1; j <= 29; j++)
                 {
@@ -105,7 +116,7 @@ namespace Quest2D
             }
             for (i = 1; i <= 17; i++)
             {
-                for (j = 60; j <= 89; j++)
+                for (j = 60; j <= 88; j++)
                 {
                     if (result[i, j] == 1)
                     {
@@ -113,13 +124,23 @@ namespace Quest2D
                     }
                 }
             }
-            for (i = 17; i <= 34; i++)
+            for (i = 17; i <= 33; i++)
             {
-                for (j = 60; j <= 89; j++)
+                for (j = 60; j <= 88; j++)
                 {
                     if (result[i, j] == 1)
                     {
                         Tilemap.SetTile(j, i, 102);
+                    }
+                }
+            }
+            for (i = 17; i <= 32; i++)
+            {
+                for (j = 30; j <= 59; j++)
+                {
+                    if (result[i, j] == 1)
+                    {
+                        Tilemap.SetTile(j, i, 103);
                     }
                 }
             }
