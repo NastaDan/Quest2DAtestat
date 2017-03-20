@@ -56,7 +56,7 @@ namespace Quest2D
             grid = new GridCollider(5760, 2160, Global.GRID_WIDTH, Global.GRID_HEIGHT);
             Tilemap.SetRect(0, 0, 1, 34, 85);//zidul la stanga
             Tilemap.SetRect(1, 0, 90, 1, 85); //zidul sus
-            Tilemap.SetRect(0, 33, 90, 1, 85);//zidul jos
+            Tilemap.SetRect(0, 34, 90, 1, 85);//zidul jos
             Tilemap.SetRect(89, 1, 1, 34, 85); //zidul dreapta
             Tilemap.SetRect(1, 1, 88, 34, 89); //fundal
             /*Tilemap.SetRect(4, 4, 3, 2, 101);*///zid random
