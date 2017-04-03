@@ -56,11 +56,9 @@ namespace Quest2D
             grid = new GridCollider(5760, 2160, Global.GRID_WIDTH, Global.GRID_HEIGHT);
             Tilemap.SetRect(0, 0, 1, 34, 85);//zidul la stanga
             Tilemap.SetRect(1, 0, 90, 1, 85); //zidul sus
-            Tilemap.SetRect(0, 34, 90, 1, 85);//zidul jos
-            Tilemap.SetRect(89, 1, 1, 34, 85); //zidul dreapta
+            Tilemap.SetRect(90, 1, 1, 34, 85); //zidul dreapta
             Tilemap.SetRect(1, 1, 88, 34, 89); //fundal
-            /*Tilemap.SetRect(4, 4, 3, 2, 101);*///zid random
-            /*Tilemap.SetRect(9, 12, 1, 2, 101);*///zid random
+
             Tilemap.SetRect(30, 1, 30, 16, 90);
             grid.SetRect(1, 33, 94, 1, true);
             grid.SetRect(89, 1, 1, 33, true);
@@ -144,7 +142,11 @@ namespace Quest2D
                     }
                 }
             }
-
+            Tilemap.SetRect(89, 17, 1, 17, 85);
+            Tilemap.SetRect(0, 34, 90, 1, 85);
+            Tilemap.SetRect(60, 29, 1, 3, 88);
+            Tilemap.SetRect(60, 18, 1, 3, 88);
+            Tilemap.SetRect(30, 26, 1, 3, 88);
 
         }
         public override void Begin()
