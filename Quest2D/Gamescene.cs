@@ -15,14 +15,15 @@ namespace Quest2D
         public GridCollider grid = null;
         public Scene nextScene;
         public int screenJ;
-        public int screenI; 
+        public int screenI;
+        public Text scorText = new Text("Score: " + Convert.ToString(Global.scor), "VCR.ttf", 40);
         
         
         public GameScene(int nextJ = 0, int nextI = 0, Player player = null) : base()
         {
             screenJ = nextJ;
             screenI = nextI;
-
+            
 
             String input =  File.ReadAllText("Assets/Nivel.oel");
             int i = 0, j = 0;
@@ -147,6 +148,7 @@ namespace Quest2D
             Tilemap.SetRect(60, 29, 1, 3, 88);
             Tilemap.SetRect(60, 18, 1, 3, 88);
             Tilemap.SetRect(30, 26, 1, 3, 88);
+            
 
         }
         public override void Begin()
@@ -160,7 +162,7 @@ namespace Quest2D
                 Global.paused = false;
             }
             Add(Global.camShaker);
-
+            
             Add(new Enemy(1600, 750));
 
         }
@@ -170,6 +172,12 @@ namespace Quest2D
             {
                 return;
             }
+            Text scorText = new Text("Score: " + Convert.ToString(Global.scor), "VCR.ttf", 40);
+            RemoveGraphic(scorText);
+            AddGraphic(scorText);
+
+
+
             const float HALF_TILE = Global.GRID_WIDTH / 2;
             if (Global.player.X - CameraX < HALF_TILE)
             {

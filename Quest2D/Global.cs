@@ -19,6 +19,7 @@ namespace Quest2D
         public static Music gameMusic = null;
         public const int GRID_WIDTH = 64;
         public const int GRID_HEIGHT = 64;
+        public static int scor = 0;
         public static CameraShaker camShaker = new CameraShaker();
         public enum Type
         {

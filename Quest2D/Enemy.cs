@@ -80,10 +80,11 @@ namespace Quest2D.Entities
                 {
 
                     health--;
+                    Global.scor = Global.scor + 30;
                     Global.camShaker.ShakeCamera();
                     DamageText dt = new DamageText(X, Y, "30");
-                    Console.Write(health);
                     Global.Joc.Scene.Add(dt);
+                    Console.Write(Global.scor);
                     if(health<=0)
                     {
                         Death();
