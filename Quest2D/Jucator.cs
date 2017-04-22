@@ -8,6 +8,7 @@ using Quest2D;
 using Quest2D.Util;
 using Quest2D.Effects;
 
+
 namespace Quest2D.Entities
 {
 
@@ -87,7 +88,7 @@ namespace Quest2D.Entities
             float newY;
             GameScene checkScene = (GameScene)Scene;
 
-
+            
             if (Global.PlayerSession.Controller.Button("Attack").Pressed)
             {
                 idleFront.Visible = false;

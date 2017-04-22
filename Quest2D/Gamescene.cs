@@ -16,9 +16,7 @@ namespace Quest2D
         public Scene nextScene;
         public int screenJ;
         public int screenI;
-        public Text scorText = new Text("Score: " + Convert.ToString(Global.scor), "VCR.ttf", 40);
-        
-        
+        public Text scorText = null;
         public GameScene(int nextJ = 0, int nextI = 0, Player player = null) : base()
         {
             screenJ = nextJ;
@@ -52,7 +50,7 @@ namespace Quest2D
             {
                 Global.camShaker = new CameraShaker();
             }
-
+            scorText =  new Text("Score: " + Convert.ToString(Global.scor), "VCR.ttf", 40);
             Tilemap = new Tilemap ("Assets/sokoban_tilesheet.png", 5760, 2160, Global.GRID_HEIGHT, Global.GRID_WIDTH);
             grid = new GridCollider(5760, 2160, Global.GRID_WIDTH, Global.GRID_HEIGHT);
             Tilemap.SetRect(0, 0, 1, 34, 85);//zidul la stanga
@@ -149,35 +147,32 @@ namespace Quest2D
             Tilemap.SetRect(60, 18, 1, 3, 88);
             Tilemap.SetRect(30, 26, 1, 3, 88);
             
-
         }
+
         public override void Begin()
         {
+            
             Entity gridEntity = new Entity(0, 0, null, grid);
             Add(gridEntity);
             AddGraphic(Tilemap);
+            AddGraphicGUI(scorText);
             if (Global.player != null)
             {
                 Add(Global.player);
                 Global.paused = false;
             }
             Add(Global.camShaker);
-            
             Add(new Enemy(1600, 750));
-
+            
         }
         public override void Update()
         {
+            base.Update();
             if (Global.paused)
             {
                 return;
             }
-            Text scorText = new Text("Score: " + Convert.ToString(Global.scor), "VCR.ttf", 40);
-            RemoveGraphic(scorText);
-            AddGraphic(scorText);
-
-
-
+            
             const float HALF_TILE = Global.GRID_WIDTH / 2;
             if (Global.player.X - CameraX < HALF_TILE)
             {
@@ -236,6 +231,7 @@ namespace Quest2D
                 CameraX = CameraX + 1920 * dx,
                 CameraY = CameraY + 1080 * dy
             }, 30f, 0).OnComplete(ScrollDone);
+            
         }
         public void ScrollDone()
         {
@@ -244,6 +240,8 @@ namespace Quest2D
             nextScene.CameraX = CameraX;
             nextScene.CameraY = CameraY;
             Global.Joc.SwitchScene(nextScene);
+            
         }
+
     }
 }

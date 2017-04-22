@@ -19,7 +19,7 @@ namespace Quest2D.Entities
         public float speed = 1f;
         public float animationSpeed = 7;
         public float animationSpeed2 = 4;
-        public const float MOVE_DISTANCE = 600;
+        public const float MOVE_DISTANCE = 200;
         public bool direction = true;
         public float distMoved = 0f;
 
@@ -84,7 +84,6 @@ namespace Quest2D.Entities
                     Global.camShaker.ShakeCamera();
                     DamageText dt = new DamageText(X, Y, "30");
                     Global.Joc.Scene.Add(dt);
-                    Console.Write(Global.scor);
                     if(health<=0)
                     {
                         Death();
