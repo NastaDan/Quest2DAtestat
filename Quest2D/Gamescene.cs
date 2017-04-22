@@ -50,7 +50,7 @@ namespace Quest2D
             {
                 Global.camShaker = new CameraShaker();
             }
-            scorText =  new Text("Score: " + Convert.ToString(Global.scor), "VCR.ttf", 40);
+            
             Tilemap = new Tilemap ("Assets/sokoban_tilesheet.png", 5760, 2160, Global.GRID_HEIGHT, Global.GRID_WIDTH);
             grid = new GridCollider(5760, 2160, Global.GRID_WIDTH, Global.GRID_HEIGHT);
             Tilemap.SetRect(0, 0, 1, 34, 85);//zidul la stanga
@@ -146,7 +146,7 @@ namespace Quest2D
             Tilemap.SetRect(60, 29, 1, 3, 88);
             Tilemap.SetRect(60, 18, 1, 3, 88);
             Tilemap.SetRect(30, 26, 1, 3, 88);
-            
+            Add(new HUD());
         }
 
         public override void Begin()
@@ -155,7 +155,6 @@ namespace Quest2D
             Entity gridEntity = new Entity(0, 0, null, grid);
             Add(gridEntity);
             AddGraphic(Tilemap);
-            AddGraphicGUI(scorText);
             if (Global.player != null)
             {
                 Add(Global.player);
@@ -163,7 +162,11 @@ namespace Quest2D
             }
             Add(Global.camShaker);
             Add(new Enemy(1600, 750));
+            Add(new Enemy(1600, 750));
+            Add(new Enemy(1600, 750));
+            Add(new Enemy(1600, 750));
             
+
         }
         public override void Update()
         {
@@ -172,7 +175,8 @@ namespace Quest2D
             {
                 return;
             }
-            
+
+
             const float HALF_TILE = Global.GRID_WIDTH / 2;
             if (Global.player.X - CameraX < HALF_TILE)
             {
@@ -242,6 +246,5 @@ namespace Quest2D
             Global.Joc.SwitchScene(nextScene);
             
         }
-
     }
 }
