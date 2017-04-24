@@ -75,11 +75,13 @@
     <Compile Include="Gamescene.cs" />
     <Compile Include="Global.cs" />
     <Compile Include="HelpScene.cs" />
+    <Compile Include="Jake.cs" />
     <Compile Include="Jucator.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Title.cs" />
     <Compile Include="WalkParticle.cs" />
+    <Compile Include="WinScene.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -97,6 +99,9 @@
     </None>
     <None Include="VCR.ttf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="yorkwhiteletter.otf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
   <ItemGroup>
@@ -123,6 +128,9 @@
     </Content>
     <Content Include="Assets\idleSide.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\jake.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Assets\MuffinidleBack.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -152,9 +160,6 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Assets\sokoban_tilesheet.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="placeholder.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

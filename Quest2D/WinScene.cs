@@ -1,0 +1,68 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Diagnostics;
+using Otter;
+using Quest2D;
+using Quest2D.Effects;
+using Quest2D.Entities;
+
+namespace Quest2D
+{
+    class WinScene : Scene
+    {
+        public Image Rectangle0 = Image.CreateRectangle(1920, 180, new Color(Color.Random));
+        public Image Rectangle1 = Image.CreateRectangle(1920, 180, new Color(Color.Random));
+        public Image Rectangle2 = Image.CreateRectangle(1920, 180, new Color(Color.Random));
+        public Image Rectangle3 = Image.CreateRectangle(1920, 180, new Color(Color.Random));
+        public Image Rectangle4 = Image.CreateRectangle(1920, 180, new Color(Color.Random));
+        public Image Rectangle5 = Image.CreateRectangle(1920, 180, new Color(Color.Random));
+        public Image ScoreBackground = Image.CreateRectangle(1280, 720, new Color(Color.Grey));
+        public Text WinText = new Text("ÎYOU'WINÏ", "yorkwhiteletter.otf", 160);
+        public Text ScoreText = new Text("Score: " + Convert.ToString(Global.scor) + " points.", "VCR.ttf", 60);
+        public Text TimerText = new Text("Time: " + Convert.ToString((Global.timpscurs.ElapsedMilliseconds)/1000) + " seconds.", "VCR.ttf", 60);
+        public Random rnd = new Random();
+        public WinScene()
+        {
+            AddGraphics(Rectangle0, Rectangle1, Rectangle2, Rectangle3, Rectangle4, Rectangle5);
+            AddGraphicGUI(ScoreBackground);
+            AddGraphicsGUI(WinText, ScoreText, TimerText);
+            WinText.CenterOrigin();
+            WinText.X = 960;
+            WinText.Y = 235;
+            ScoreText.CenterOrigin();
+            ScoreText.X = 680;
+            ScoreText.Y = 400;
+            TimerText.CenterOrigin();
+            TimerText.X = 680;
+            TimerText.Y = 500;
+            WinText.Color.SetColor(Color.Gold);
+            ScoreBackground.OutlineColor.SetColor(Color.Gold);
+            ScoreBackground.OutlineThickness = 18;
+            Rectangle0.SetPosition(0, 0);
+            Rectangle1.SetPosition(0, 180);
+            Rectangle2.SetPosition(0, 360);
+            Rectangle3.SetPosition(0, 540);
+            Rectangle4.SetPosition(0, 720);
+            Rectangle5.SetPosition(0, 900);
+            ScoreBackground.SetPosition(320, 180);
+
+        }
+        public override void Update()
+        {
+            base.Update();
+            int halfer = rnd.Next(0, Int32.MaxValue);
+            if(halfer < (Int32.MaxValue)/8)
+            {
+                Rectangle0.Color.SetColor(Color.Random);
+                Rectangle1.Color.SetColor(Color.Random);
+                Rectangle2.Color.SetColor(Color.Random);
+                Rectangle3.Color.SetColor(Color.Random);
+                Rectangle4.Color.SetColor(Color.Random);
+                Rectangle5.Color.SetColor(Color.Random);
+            }
+        }
+    }
+}

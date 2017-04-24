@@ -167,7 +167,7 @@ namespace Quest2D
             Add(new Enemy(1600, 750));
             Add(new Enemy(1600, 750));
             Add(new Enemy(1600, 750));
-            
+            Add(new Jake(1000, 1620));
 
         }
         public override void Update()

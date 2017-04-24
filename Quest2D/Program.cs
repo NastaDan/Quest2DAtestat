@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Otter;
-using Quest2D;
+﻿using Otter;
 
 namespace Quest2D
 {
@@ -12,7 +6,7 @@ namespace Quest2D
     {
         static void Main(string[] args)
         {
-            Global.Joc = new Game("Quest2D", 1920, 1080, 60, false);
+            Global.Joc = new Game("Quest2D", 1920, 1080, 60, true);
 
             Global.Joc.Color.SetColor(Color.Red);
             Global.Joc.FirstScene = new TitleScene();

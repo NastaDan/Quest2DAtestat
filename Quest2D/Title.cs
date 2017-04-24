@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Diagnostics;
 using Otter;
 using Quest2D;
 
@@ -19,6 +20,7 @@ namespace Quest2D
         public Image darkScreen = Image.CreateRectangle(1920, 1080, new Otter.Color("000000"));
         public Music titleSong = new Music("Sounds/title.ogg", true);
         public Random rnd = new Random();
+        
 
         public TitleScene()
         {
@@ -72,6 +74,8 @@ namespace Quest2D
             titleSong.Stop();
             Global.Joc.RemoveScene();
             Global.Joc.AddScene(new GameScene());
+            Global.timpscurs.Start();
+            
         }
         private void PlayHelp()
         {

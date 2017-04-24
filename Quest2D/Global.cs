@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Diagnostics;
+using System.Timers;
 using Otter;
 using Quest2D;
 using Quest2D.Entities;
@@ -21,11 +23,13 @@ namespace Quest2D
         public const int GRID_HEIGHT = 64;
         public static int scor = 0;
         public static CameraShaker camShaker = new CameraShaker();
+        public static Stopwatch timpscurs = Stopwatch.StartNew();
         public enum Type
         {
             PLAYER,
             ATTACKINGPLAYER,
-            ENEMY
+            ENEMY,
+            JAKE
         }
     }
 }
