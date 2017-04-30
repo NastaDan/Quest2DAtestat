@@ -1,11 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Diagnostics;
 using Otter;
-using Quest2D;
 
 namespace Quest2D
 {
@@ -19,6 +13,7 @@ namespace Quest2D
         public float blinkTimer = 0;
         public Image darkScreen = Image.CreateRectangle(1920, 1080, new Otter.Color("000000"));
         public Music titleSong = new Music("Sounds/title.ogg", true);
+        public Music gameSong = new Music("Sounds/game.ogg", true);
         public Random rnd = new Random();
         
 
@@ -29,18 +24,19 @@ namespace Quest2D
             titleText.X = Global.Joc.HalfWidth;
             titleText.Y = 100;
             titleText.Color.SetColor(Color.Random);
-            this.AddGraphic(titleText);
+            AddGraphic(titleText);
             enterText.CenterOrigin();
             enterText.X = Global.Joc.HalfWidth;
             enterText.Y = Global.Joc.Height - 300;
-            this.AddGraphic(enterText);
+            AddGraphic(enterText);
             helpText.CenterOrigin();
             helpText.X = Global.Joc.HalfWidth;
             helpText.Y = Global.Joc.Height - 150;
-            this.AddGraphic(helpText);
+            AddGraphic(helpText);
             titleSong.Play();
             darkScreen.Alpha = 0;
-            this.AddGraphic(darkScreen);
+            AddGraphic(darkScreen);
+            gameSong.Stop();
         }
 
         public override void Update()
@@ -75,10 +71,12 @@ namespace Quest2D
             Global.Joc.RemoveScene();
             Global.Joc.AddScene(new GameScene());
             Global.timpscurs.Start();
+            gameSong.Play();
             
         }
         private void PlayHelp()
         {
+            titleSong.Stop();
             Global.Joc.RemoveScene();
             Global.Joc.AddScene(new HelpScene());
         }

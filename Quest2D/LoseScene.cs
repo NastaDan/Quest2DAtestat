@@ -4,7 +4,7 @@ using Otter;
 
 namespace Quest2D
 {
-    class WinScene : Scene
+    class LoseScene : Scene
     {
         public Image Rectangle0 = Image.CreateRectangle(1920, 180, new Color(Color.Random));
         public Image Rectangle1 = Image.CreateRectangle(1920, 180, new Color(Color.Random));
@@ -13,13 +13,14 @@ namespace Quest2D
         public Image Rectangle4 = Image.CreateRectangle(1920, 180, new Color(Color.Random));
         public Image Rectangle5 = Image.CreateRectangle(1920, 180, new Color(Color.Random));
         public Image ScoreBackground = Image.CreateRectangle(1280, 720, new Color(Color.Grey));
-        public Text WinText = new Text("ÎYOU'WINÏ", "yorkwhiteletter.otf", 160);
+        public Text WinText = new Text("ÎYOU'LOSTÏ", "yorkwhiteletter.otf", 160);
         public Text ScoreText = new Text("Score: " + Convert.ToString(Global.scor) + " points  ", "VCR.ttf", 60);
-        public Text TimerText = new Text("Time: " + Convert.ToString((Global.timpscurs.ElapsedMilliseconds)/1000) + " seconds  ", "VCR.ttf", 60);
+        public Text TimerText = new Text("Time: " + Convert.ToString((Global.timpscurs.ElapsedMilliseconds) / 1000) + " seconds  ", "VCR.ttf", 60);
+        public Random rnd = new Random();
+        public Shader invert = new Shader("Assets/invert.frag");
         public Image vignette = new Image("Assets/vignette.png");
         public Image darkScreen = Image.CreateRectangle(1920, 1080, new Otter.Color("000000"));
-        public Random rnd = new Random();
-        public WinScene()
+        public LoseScene()
         {
             Global.PlayerHealth = 4;
             AddGraphicGUI(vignette);
@@ -35,8 +36,8 @@ namespace Quest2D
             TimerText.CenterOrigin();
             TimerText.X = 680;
             TimerText.Y = 500;
-            WinText.Color.SetColor(Color.Gold);
-            ScoreBackground.OutlineColor.SetColor(Color.Gold);
+            WinText.Color.SetColor(Color.Black);
+            ScoreBackground.OutlineColor.SetColor(Color.Black);
             ScoreBackground.OutlineThickness = 18;
             Rectangle0.SetPosition(0, 0);
             Rectangle1.SetPosition(0, 180);
@@ -46,6 +47,13 @@ namespace Quest2D
             Rectangle5.SetPosition(0, 900);
             ScoreBackground.SetPosition(320, 180);
 
+            Rectangle0.Shader = invert;
+            Rectangle1.Shader = invert;
+            Rectangle2.Shader = invert;
+            Rectangle3.Shader = invert;
+            Rectangle4.Shader = invert;
+            Rectangle5.Shader = invert;
+
             darkScreen.Alpha = 0;
             AddGraphic(darkScreen);
         }
@@ -53,7 +61,7 @@ namespace Quest2D
         {
             base.Update();
             int halfer = rnd.Next(0, Int32.MaxValue);
-            if(halfer < (Int32.MaxValue)/8)
+            if (halfer < (Int32.MaxValue) / 8)
             {
                 Rectangle0.Color.SetColor(Color.Random);
                 Rectangle1.Color.SetColor(Color.Random);

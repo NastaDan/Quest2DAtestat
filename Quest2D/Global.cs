@@ -1,12 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Diagnostics;
-using System.Timers;
+﻿using System.Diagnostics;
 using Otter;
-using Quest2D;
 using Quest2D.Entities;
 using Quest2D.Util;
 
@@ -24,6 +17,7 @@ namespace Quest2D
         public static int scor = 0;
         public static CameraShaker camShaker = new CameraShaker();
         public static Stopwatch timpscurs = Stopwatch.StartNew();
+        public static int PlayerHealth = 4;
         public enum Type
         {
             PLAYER,

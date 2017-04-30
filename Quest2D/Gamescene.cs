@@ -1,9 +1,7 @@
 ﻿using Otter;
 using Quest2D.Entities;
 using Quest2D.Util;
-using Quest2D;
 using System;
-using System.Text;
 using System.IO;
 
 namespace Quest2D
@@ -17,6 +15,13 @@ namespace Quest2D
         public int screenJ;
         public int screenI;
         public Text scorText = new Text("Score: " + Convert.ToString(Global.scor), "VCR.ttf", 40);
+
+        public Image vignette = new Image("Assets/vignette.png");
+        public Image heart1 = new Image("Assets/heart.png");
+        public Image heart2 = new Image("Assets/heart.png");
+        public Image heart3 = new Image("Assets/heart.png");
+        public Image heart4 = new Image("Assets/heart.png");
+
         public GameScene(int nextJ = 0, int nextI = 0, Player player = null) : base()
         {
             screenJ = nextJ;
@@ -146,12 +151,12 @@ namespace Quest2D
             Tilemap.SetRect(60, 29, 1, 3, 88);
             Tilemap.SetRect(60, 18, 1, 3, 88);
             Tilemap.SetRect(30, 26, 1, 3, 88);
-            
+
         }
 
         public override void Begin()
         {
-            
+
             Entity gridEntity = new Entity(0, 0, null, grid);
             Add(gridEntity);
             AddGraphic(Tilemap);
@@ -161,23 +166,93 @@ namespace Quest2D
                 Global.paused = false;
             }
             Add(Global.camShaker);
+            AddGraphicGUI(vignette);
 
-            AddGraphicGUI(scorText);
-            Add(new Enemy(1600, 750));
-            Add(new Enemy(1600, 750));
-            Add(new Enemy(1600, 750));
-            Add(new Enemy(1600, 750));
+            Add(new Enemy(1600, 750));//prima camera
+            Add(new Enemy(576, 370));//prima camera
+            Add(new Enemy(576, 708));//prima camera
+            Add(new Enemy(2372, 576));//a doua camera
+            Add(new Enemy(3264, 96));//a doua camera
+            Add(new Enemy(3456, 64));//a doua camera
+            Add(new Enemy(2496, 960));//a doua camera
+            Add(new Enemy(4864, 96));//a treia camera
+            Add(new Enemy(4544, 970));//a treia camera
+            Add(new Enemy(5524, 940));//a treia camera
+            Add(new Enemy(4532, 1172));//a patra camera
+            Add(new Enemy(5184, 1708));//a patra camera
+            Add(new Enemy(5576, 2002));//a patra camera
+            Add(new Enemy(4608, 2000));//a patra camera
+            Add(new Enemy(3584, 1472)); // a cincea camera
+            Add(new Enemy(3584, 1792)); // a cincea camera
+
             Add(new Jake(1000, 1620));
 
+            AddGraphicsGUI(heart1, heart2, heart3, heart4);
+            heart1.Visible = true;
+            heart2.Visible = true;
+            heart3.Visible = true;
+            heart4.Visible = true;
+
+            heart1.CenterOrigin();
+            heart2.CenterOrigin();
+            heart3.CenterOrigin();
+            heart4.CenterOrigin();
+
+            heart1.Y = 32;
+            heart2.Y = 32;
+            heart3.Y = 32;
+            heart4.Y = 32;
+
+            heart1.X = 1895;
+            heart2.X = 1839;
+            heart3.X = 1783;
+            heart4.X = 1727;
+
+            AddGraphicGUI(scorText);
         }
         public override void Update()
         {
             base.Update();
+
             if (Global.paused)
             {
                 return;
             }
             scorText.String = "Score: " + Convert.ToString(Global.scor);
+            if(Global.PlayerHealth==4)
+            {
+                heart1.Visible = true;
+                heart2.Visible = true;
+                heart3.Visible = true;
+                heart4.Visible = true;
+            }
+            else if(Global.PlayerHealth == 3)
+            {
+                heart1.Visible = true;
+                heart2.Visible = true;
+                heart3.Visible = true;
+                heart4.Visible = false;
+            }
+            else if(Global.PlayerHealth == 2)
+            {
+                heart1.Visible = true;
+                heart2.Visible = true;
+                heart3.Visible = false;
+                heart4.Visible = false;
+            }
+            else if (Global.PlayerHealth == 1)
+            {
+                heart1.Visible = true;
+                heart2.Visible = false;
+                heart3.Visible = false;
+                heart4.Visible = false;
+            }
+            else if(Global.PlayerHealth ==0)
+            {
+                Global.timpscurs.Stop();
+                Global.Joc.RemoveScene();
+                Global.Joc.AddScene(new LoseScene());
+            }
 
             const float HALF_TILE = Global.GRID_WIDTH / 2;
             if (Global.player.X - CameraX < HALF_TILE)

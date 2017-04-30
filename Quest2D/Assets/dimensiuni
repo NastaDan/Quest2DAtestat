@@ -1,9 +1,0 @@
-idleFront.png - 448x79, fiecare sprite e 64*79. 7 in total
-idleBack.png 448x77, fiecare sprite e 64*77. 7 in total
-idleSide.png  308x83, fiecare sprite e 44*83, 7 in total
-attackFront.png 868x147, fiecare sprite e 124*147, 7 in total
-attackBack.png 980x135, fiecare sprite e 140*135, 7 in total
-attackSide.png 1134x121, fiecare sprite e 162*121, 7 in total
-runBack.png 760x81, fiecare sprite e 76x81, 10 in total
-runFront.png 800x81, fiecare sprite e 80x81, 10 in total
-runSide.png 640x87, fiecare sprite e 64x87, 10 in total

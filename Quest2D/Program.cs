@@ -7,8 +7,6 @@ namespace Quest2D
         static void Main(string[] args)
         {
             Global.Joc = new Game("Quest2D", 1920, 1080, 60, true);
-
-            Global.Joc.Color.SetColor(Color.Red);
             Global.Joc.FirstScene = new TitleScene();
             Global.PlayerSession = Global.Joc.AddSession("Player");
             Global.PlayerSession.Controller.AddButton("Start");
@@ -26,11 +24,6 @@ namespace Quest2D
             Global.PlayerSession.Controller.Button("Attack").AddKey(Key.Space);
             Global.PlayerSession.Controller.Button("Help").AddKey(Key.Delete);
             Global.Joc.Start();
-            
-            
         }
     }
-    
-    
-
 }

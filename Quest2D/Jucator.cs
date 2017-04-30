@@ -1,17 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Otter;
-using Quest2D;
-using Quest2D.Util;
+﻿using Otter;
 using Quest2D.Effects;
 
 
 namespace Quest2D.Entities
 {
-
     public class Player : Entity
     {
         public float MoveSpeed = 5.0f;
@@ -21,8 +13,8 @@ namespace Quest2D.Entities
         public float animationSpeed2 = 4;
         public const int WIDTH = 60;
         public const int HEIGHT = 81;
-
-
+        public const float TIMER_BLINK = 90f;
+        public float blinkTimer = 60;
 
         enum FacingPosition
         {
@@ -32,6 +24,7 @@ namespace Quest2D.Entities
             Right,
             Idle
         }
+
 
         Spritemap<string> idleFront = new Spritemap<string>("Assets/idleFront.png", 64, 79);
         Spritemap<string> idleBack = new Spritemap<string>("Assets/idleBack.png", 64, 77);
@@ -45,10 +38,12 @@ namespace Quest2D.Entities
         FacingPosition direction = FacingPosition.Idle;
         BoxCollider player = new BoxCollider(63, 81, Global.Type.PLAYER);
         BoxCollider playerattacking = new BoxCollider(140, 130, Global.Type.PLAYER);
+
         public Player(float x = 0, float y = 0)
         {
             X = x;
             Y = y;
+
             idleFront.Add("idleFront", "0,1,2,3,4,5,6", animationSpeed);
             idleBack.Add("idleBack", "0,1,2,3,4,5,6", animationSpeed);
             idleSide.Add("idleSide", "0,1,2,3,4,5,6", animationSpeed);
@@ -77,18 +72,42 @@ namespace Quest2D.Entities
             SetCollider(player);
             player.CenterOrigin();
 
+
         }
         public override void Update()
         {
             base.Update();
-            SetCollider(playerattacking);
+
+            SetCollider(player);
+
             float xSpeed = 0;
             float ySpeed = 0;
             float newX;
             float newY;
+
             GameScene checkScene = (GameScene)Scene;
 
-            
+            if (Global.attacking)
+            {
+                SetCollider(playerattacking);
+            }
+            else
+            {
+                SetCollider(player);
+            }
+
+            if (Collider.Overlap(X, Y, Global.Type.ENEMY) && !Global.attacking)
+            {
+                blinkTimer++;
+                if (blinkTimer >= TIMER_BLINK)
+                {
+                    Global.PlayerHealth--;
+                    blinkTimer = 0;
+                    Global.camShaker.ShakeCamera(10);
+                }
+            }
+
+
             if (Global.PlayerSession.Controller.Button("Attack").Pressed)
             {
                 idleFront.Visible = false;
@@ -102,10 +121,9 @@ namespace Quest2D.Entities
                 attackSide.Visible = false;
                 movement = false;
                 Global.camShaker.ShakeCamera();
-                switch (direction)
-
-                {
-                    case FacingPosition.Front:
+                    switch (direction)
+                    {
+                        case FacingPosition.Front:
                         {
                             Global.attacking = true;
                             idleFront.Visible = false;
@@ -121,7 +139,7 @@ namespace Quest2D.Entities
                             Global.camShaker.ShakeCamera();
                             break;
                         }
-                    case FacingPosition.Back:
+                        case FacingPosition.Back:
                         {
                             Global.attacking = true;
                             idleFront.Visible = false;
@@ -137,7 +155,7 @@ namespace Quest2D.Entities
                             Global.camShaker.ShakeCamera();
                             break;
                         }
-                    case FacingPosition.Left:
+                        case FacingPosition.Left:
                         {
                             Global.attacking = true;
                             idleFront.Visible = false;
@@ -154,7 +172,7 @@ namespace Quest2D.Entities
                             Global.camShaker.ShakeCamera();
                             break;
                         }
-                    case FacingPosition.Right:
+                        case FacingPosition.Right:
                         {
                             Global.attacking = true;
                             idleFront.Visible = false;
@@ -171,7 +189,7 @@ namespace Quest2D.Entities
                             Global.camShaker.ShakeCamera();
                             break;
                         }
-                }
+                     }
             }
             if (Global.PlayerSession.Controller.Button("Attack").Released)
             {
@@ -179,70 +197,69 @@ namespace Quest2D.Entities
                 switch (direction)
                 {
                     case FacingPosition.Front:
-                        {
-                            Global.attacking = false;
-                            idleFront.Visible = false;
-                            idleBack.Visible = true;
-                            idleSide.Visible = false;
-                            runFront.Visible = false;
-                            runBack.Visible = false;
-                            runSide.Visible = false;
-                            attackBack.Visible = false;
-                            attackFront.Visible = false;
-                            attackSide.Visible = false;
-                            idleBack.Play("idleBack");
-                            break;
-                        }
+                    {
+                        Global.attacking = false;
+                        idleFront.Visible = false;
+                        idleBack.Visible = true;
+                        idleSide.Visible = false;
+                        runFront.Visible = false;
+                        runBack.Visible = false;
+                        runSide.Visible = false;
+                        attackBack.Visible = false;
+                        attackFront.Visible = false;
+                        attackSide.Visible = false;
+                        idleBack.Play("idleBack");
+                        break;
+                    }
                     case FacingPosition.Back:
-                        {
-                            Global.attacking = false;
-                            idleFront.Visible = true;
-                            idleBack.Visible = false;
-                            idleSide.Visible = false;
-                            runFront.Visible = false;
-                            runBack.Visible = false;
-                            runSide.Visible = false;
-                            attackBack.Visible = false;
-                            attackFront.Visible = false;
-                            attackSide.Visible = false;
-                            idleFront.Play("idleFront");
-                            break;
-                        }
+                    {
+                        Global.attacking = false;
+                        idleFront.Visible = true;
+                        idleBack.Visible = false;
+                        idleSide.Visible = false;
+                        runFront.Visible = false;
+                        runBack.Visible = false;
+                        runSide.Visible = false;
+                        attackBack.Visible = false;
+                        attackFront.Visible = false;
+                        attackSide.Visible = false;
+                        idleFront.Play("idleFront");
+                        break;
+                    }
                     case FacingPosition.Left:
-                        {
-                            Global.attacking = false;
-                            idleFront.Visible = false;
-                            idleBack.Visible = false;
-                            idleSide.Visible = true;
-                            runFront.Visible = false;
-                            runBack.Visible = false;
-                            runSide.Visible = false;
-                            attackBack.Visible = false;
-                            attackFront.Visible = false;
-                            attackSide.Visible = false;
-                            idleSide.Play("idleSide");
-                            idleSide.FlippedX = true;
-                            break;
-                        }
+                    {
+                        Global.attacking = false;
+                        idleFront.Visible = false;
+                        idleBack.Visible = false;
+                        idleSide.Visible = true;
+                        runFront.Visible = false;
+                        runBack.Visible = false;
+                        runSide.Visible = false;
+                        attackBack.Visible = false;
+                        attackFront.Visible = false;
+                        attackSide.Visible = false;
+                        idleSide.Play("idleSide");
+                        idleSide.FlippedX = true;
+                        break;
+                    }
                     case FacingPosition.Right:
-                        {
-                            Global.attacking = false;
-                            idleFront.Visible = false;
-                            idleBack.Visible = false;
-                            idleSide.Visible = true;
-                            runFront.Visible = false;
-                            runBack.Visible = false;
-                            runSide.Visible = false;
-                            attackBack.Visible = false;
-                            attackFront.Visible = false;
-                            attackSide.Visible = false;
-                            idleSide.Play("idleSide");
-                            idleSide.FlippedX = false;
-                            break;
-                        }
+                    {
+                        Global.attacking = false;
+                        idleFront.Visible = false;
+                        idleBack.Visible = false;
+                        idleSide.Visible = true;
+                        runFront.Visible = false;
+                        runBack.Visible = false;
+                        runSide.Visible = false;
+                        attackBack.Visible = false;
+                        attackFront.Visible = false;
+                        attackSide.Visible = false;
+                        idleSide.Play("idleSide");
+                        idleSide.FlippedX = false;
+                        break;
+                    }
                 }
             }
-
             if (Global.attacking == false)
             {
                 if (Global.PlayerSession.Controller.Button("Up").Down)
@@ -251,6 +268,10 @@ namespace Quest2D.Entities
                     if (!checkScene.grid.GetRect(X, newY, X + WIDTH, newY + HEIGHT, false))
                     {
                         ySpeed = -MoveSpeed;
+                        if (Collider.Overlap(X, Y, Global.Type.ENEMY))
+                        {
+                            ySpeed = ySpeed / 2;
+                        }
                     }
 
                 }
@@ -260,6 +281,10 @@ namespace Quest2D.Entities
                     if (!checkScene.grid.GetRect(newX, Y, newX + WIDTH, Y + HEIGHT, false))
                     {
                         xSpeed = -MoveSpeed;
+                        if (Collider.Overlap(X, Y, Global.Type.ENEMY))
+                        {
+                            xSpeed = xSpeed / 2;
+                        }
                     }
                 }
                 if (Global.PlayerSession.Controller.Button("Right").Down)
@@ -268,6 +293,10 @@ namespace Quest2D.Entities
                     if (!checkScene.grid.GetRect(newX, Y, newX + WIDTH, Y + HEIGHT, false))
                     {
                         xSpeed = MoveSpeed;
+                        if (Collider.Overlap(X, Y, Global.Type.ENEMY))
+                        {
+                            xSpeed = xSpeed / 2;
+                        }
                     }
                 }
                 if (Global.PlayerSession.Controller.Button("Down").Down)
@@ -276,6 +305,10 @@ namespace Quest2D.Entities
                     if (!checkScene.grid.GetRect(X, newY, X + WIDTH, newY + HEIGHT, false))
                     {
                         ySpeed = MoveSpeed;
+                        if (Collider.Overlap(X, Y, Global.Type.ENEMY))
+                        {
+                            ySpeed = ySpeed / 2;
+                        }
                     }
                 }
 
@@ -323,7 +356,7 @@ namespace Quest2D.Entities
                     attackFront.Visible = false;
                     attackSide.Visible = false;
                     runBack.Play("runBack");
-                    //runSide.FlippedX = false;
+
                     movement = true;
                     direction = FacingPosition.Front;
                 }
@@ -339,7 +372,7 @@ namespace Quest2D.Entities
                     attackFront.Visible = false;
                     attackSide.Visible = false;
                     runFront.Play("runFront");
-                    //runSide.FlippedX = false;
+
                     movement = true;
                     direction = FacingPosition.Back;
                 }
@@ -358,7 +391,7 @@ namespace Quest2D.Entities
                     idleSide.Play("idleSide");
                     idleSide.FlippedX = true;
                     movement = false;
-                    //direction = FacingPosition.Left;
+
                 }
                 else if (Global.PlayerSession.Controller.Button("Right").Released && ySpeed == 0 && xSpeed == 0)
                 {
@@ -374,7 +407,7 @@ namespace Quest2D.Entities
                     idleSide.Play("idleSide");
                     idleSide.FlippedX = false;
                     movement = false;
-                    //direction = FacingPosition.Left;
+
                 }
                 else if (Global.PlayerSession.Controller.Button("Up").Released && ySpeed == 0 && xSpeed == 0)
                 {
@@ -389,8 +422,7 @@ namespace Quest2D.Entities
                     attackSide.Visible = false;
                     idleBack.Play("idleBack");
                     movement = false;
-                    //runSide.FlippedX = false;
-                    //direction = FacingPosition.Front;
+
                 }
                 else if (Global.PlayerSession.Controller.Button("Down").Released && ySpeed == 0 && xSpeed == 0)
                 {
@@ -405,39 +437,38 @@ namespace Quest2D.Entities
                     attackSide.Visible = false;
                     idleFront.Play("idleFront");
                     movement = false;
-                    //runSide.FlippedX = false;
-                    //direction = FacingPosition.Back;
+
                 }
             }
             if (movement == true)
             {
-                // Add walking particles
+
                 float particleXBuffer = 0;
                 float particleYBuffer = 0;
                 switch (direction)
                 {
                     case FacingPosition.Front:
                         {
-                            particleXBuffer = Otter.Rand.Float(8, 24);
-                            particleYBuffer = Otter.Rand.Float(0, 5);
+                            particleXBuffer = Rand.Float(8, 24);
+                            particleYBuffer = Rand.Float(0, 5);
                             Global.Joc.Scene.Add(new WalkParticle(X + 20 + particleXBuffer, Y + 40));
                             break;
                         }
                     case FacingPosition.Back:
                         {
-                            particleXBuffer = Otter.Rand.Float(8, 24);
+                            particleXBuffer = Rand.Float(8, 24);
                             Global.Joc.Scene.Add(new WalkParticle(X + 20 + particleXBuffer, Y - 5));
                             break;
                         }
                     case FacingPosition.Left:
                         {
-                            particleYBuffer = Otter.Rand.Float(-5, 5);
+                            particleYBuffer = Rand.Float(-5, 5);
                             Global.Joc.Scene.Add(new WalkParticle(X + 48, Y + 40 + particleYBuffer));
                             break;
                         }
                     case FacingPosition.Right:
                         {
-                            particleYBuffer = Otter.Rand.Float(-5, 5);
+                            particleYBuffer = Rand.Float(-5, 5);
                             Global.Joc.Scene.Add(new WalkParticle(X + 3, Y + 40 + particleYBuffer));
                             break;
                         }
@@ -456,10 +487,6 @@ namespace Quest2D.Entities
                     X += xSpeed;
                     Y += ySpeed;
             }
-
-
-
-
         }
     }
 }
