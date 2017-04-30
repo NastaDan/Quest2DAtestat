@@ -16,6 +16,7 @@ namespace Quest2D
         public Text WinText = new Text("ÎYOU'WINÏ", "yorkwhiteletter.otf", 160);
         public Text ScoreText = new Text("Score: " + Convert.ToString(Global.scor) + " points  ", "VCR.ttf", 60);
         public Text TimerText = new Text("Time: " + Convert.ToString((Global.timpscurs.ElapsedMilliseconds)/1000) + " seconds  ", "VCR.ttf", 60);
+        public Text button = new Text("Press Enter to play/Delete to exit", "VCR.ttf", 40);
         public Image vignette = new Image("Assets/vignette.png");
         public Image darkScreen = Image.CreateRectangle(1920, 1080, new Otter.Color("000000"));
         public Random rnd = new Random();
@@ -25,7 +26,7 @@ namespace Quest2D
             AddGraphicGUI(vignette);
             AddGraphics(Rectangle0, Rectangle1, Rectangle2, Rectangle3, Rectangle4, Rectangle5);
             AddGraphicGUI(ScoreBackground);
-            AddGraphicsGUI(WinText, ScoreText, TimerText);
+            AddGraphicsGUI(WinText, ScoreText, TimerText, button);
             WinText.CenterOrigin();
             WinText.X = 960;
             WinText.Y = 235;
@@ -35,6 +36,10 @@ namespace Quest2D
             TimerText.CenterOrigin();
             TimerText.X = 680;
             TimerText.Y = 500;
+            button.CenterOrigin();
+            button.X = 960;
+            button.Y = 800;
+            button.Color.SetColor(Color.Gold);
             WinText.Color.SetColor(Color.Gold);
             ScoreBackground.OutlineColor.SetColor(Color.Gold);
             ScoreBackground.OutlineThickness = 18;

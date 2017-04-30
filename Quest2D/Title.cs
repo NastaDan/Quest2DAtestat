@@ -11,7 +11,7 @@ namespace Quest2D
         public Text helpText = new Text("Press Delete for help", "Little Kid.otf", 120);
         public const float TIMER_BLINK = 30f;
         public float blinkTimer = 0;
-        public Image darkScreen = Image.CreateRectangle(1920, 1080, new Otter.Color("000000"));
+        public Image darkScreen = Image.CreateRectangle(1920, 1080, new Color("000000"));
         public Music titleSong = new Music("Sounds/title.ogg", true);
         public Music gameSong = new Music("Sounds/game.ogg", true);
         public Random rnd = new Random();
